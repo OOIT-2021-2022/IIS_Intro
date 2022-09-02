@@ -1,10 +1,12 @@
 package drawing;
 
 import java.awt.Color;
-import java.awt.Point;
-import java.awt.Shape;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import geometry.Point;
+import geometry.Shape;
 
 import javax.swing.JPanel;
 
@@ -46,7 +48,7 @@ public class PnlDrawing extends JPanel{
 	}
 	
 	public void deselect() {
-		shapes.forEach(shape -> shape.setSelected());
+		shapes.forEach(shape -> shape.setSelected(false));
 		repaint();
 	}
 	
@@ -60,8 +62,8 @@ public class PnlDrawing extends JPanel{
 		}
 	}
 	
-	public getSelected() {
-		for(i = shapes.size() - 1; i >= 0; i--) {
+	public int getSelected() {
+		for (i = shapes.size() - 1; i >= 0; i--) {
 			if(shapes.get(i).isSelected()) {
 				return i;
 			}

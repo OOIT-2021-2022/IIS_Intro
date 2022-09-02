@@ -15,9 +15,10 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import geometry.Point;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Point;
 
 import javax.swing.JTextField;
 

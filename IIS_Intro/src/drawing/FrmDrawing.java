@@ -1,43 +1,52 @@
 package drawing;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.border.TitledBorder;
 
+import drawing.DlgCircle;
+import drawing.DlgDonut;
+import drawing.DlgLine;
+import drawing.DlgPoint;
+import drawing.DlgRectangle;
 import geometry.Circle;
 import geometry.Donut;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
 import geometry.Shape;
-import geometry.SurfShape;
+import stack.DlgStack;
 
-import javax.swing.JSplitPane;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JColorChooser;
+import javax.swing.UIManager;
+import java.awt.Color;
+import java.awt.Dimension;
 
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+
+import java.awt.Component;
+import javax.swing.border.LineBorder;
+import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-import javax.swing.BoxLayout;
-import javax.swing.SwingConstants;
-import javax.swing.JToggleButton;
-import javax.swing.ButtonGroup;
+import java.util.ArrayList;
+import java.awt.Cursor;
 
 public class FrmDrawing extends JFrame {
 
 	private final int OPERATION_DRAWING = 1;
-	private final int OPERATION_EDIT_DELETE = 1;
+	private final int OPERATION_EDIT_DELETE = 0;
 	
 	private int activeOperation = OPERATION_DRAWING;
 	
@@ -48,11 +57,11 @@ public class FrmDrawing extends JFrame {
 	private JToggleButton btnOperationEditOrDelete = new JToggleButton("Select");
 	private JButton btnActionEdit = new JButton("Modify");
 	private JButton btnActionDelete = new JButton("Delete");
-	private JToggleButton btnPoint = new JToggleButton("Point");
-	private JToggleButton btnLine = new JToggleButton("Line");
-	private JToggleButton btnRectangle = new JToggleButton("Rectangle");
-	private JToggleButton btnCircle = new JToggleButton("Circle");
-	private JToggleButton btnDonut = new JToggleButton("Donut");
+	private JToggleButton btnShapePoint = new JToggleButton("Point");
+	private JToggleButton btnShapeLine = new JToggleButton("Line");
+	private JToggleButton btnShapeRectangle = new JToggleButton("Rectangle");
+	private JToggleButton btnShapeCircle = new JToggleButton("Circle");
+	private JToggleButton btnShapeDonut = new JToggleButton("Donut");
 	private JButton btnColorEdge = new JButton("Edge color");
 	private JButton btnColorInner = new JButton("Inner color");
 	
@@ -60,8 +69,9 @@ public class FrmDrawing extends JFrame {
 	boolean lineWaitingForEndPoint = false;
 	private Point startPoint;
 	
-	private JPanel contentPane;
 	
+	private JPanel contentPane;
+
 	/**
 	 * Launch the application.
 	 */
@@ -82,84 +92,83 @@ public class FrmDrawing extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmDrawing() {
-		setTitle("Ivan Stankovic, IT-22/2020");
+		setTitle("Ivan Stankovic IT-22/2020");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 625, 529);
+		setBounds(100, 100, 1100, 700);
+		setLocationRelativeTo(null);
+		setMinimumSize(new Dimension(1100, 700));
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
-		setContentPane(contentPane);
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
-		JPanel pnlDrawing = new JPanel();
+		setContentPane(contentPane);
+
 		pnlDrawing.addMouseListener(pnlDrawingClickListener());
 		contentPane.add(pnlDrawing, BorderLayout.CENTER);
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.WEST);
-		panel.setLayout(new GridLayout(4, 0, 0, 0));
-		
 		JPanel panel_1 = new JPanel();
-		panel.add(panel_1);
-		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.Y_AXIS));
+		contentPane.add(panel_1, BorderLayout.WEST);
+		panel_1.setLayout(new GridLayout(4, 0, 0, 0));
 		
-		JToggleButton btnOperationDrawing = new JToggleButton("Drawing");
+		JPanel panel_2 = new JPanel();
+		panel_1.add(panel_2);
+		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
+		
 		btnOperationDrawing.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setOperationDrawing();
 			}
 		});
-		btnOperationDrawing.setSelected(true);
+		btnOperationDrawing.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnsOperation.add(btnOperationDrawing);
-		panel_1.add(btnOperationDrawing);
+		panel_2.add(btnOperationDrawing);
 		
-		JToggleButton btnOperationEditorDelete = new JToggleButton("Select");
-		btnOperationEditorDelete.addActionListener(new ActionListener() {
+		btnOperationEditOrDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setOperationEditDelete();
 			}
 		});
-		btnsOperation.add(btnOperationEditorDelete);
-		panel_1.add(btnOperationEditorDelete);
-		
-		JPanel panel_2 = new JPanel();
-		panel.add(panel_2);
-		
-		JButton btnActionEdit = new JButton("Modify");
-		btnActionEdit.setEnabled(false);
-		panel_2.add(btnActionEdit);
-		
-		JButton btnActionDelete = new JButton("Delete");
-		btnActionDelete.setEnabled(false);
-		panel_2.add(btnActionDelete);
+		btnOperationEditOrDelete.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnsOperation.add(btnOperationEditOrDelete);
+		panel_2.add(btnOperationEditOrDelete);
 		
 		JPanel panel_3 = new JPanel();
-		panel.add(panel_3);
-		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.Y_AXIS));
+		panel_1.add(panel_3);
 		
-		JToggleButton btnPoint = new JToggleButton("Point");
-		btnsShapes.add(btnPoint);
-		panel_3.add(btnPoint);
+		btnActionEdit.addActionListener(btnActionEditClickListener());
+		btnActionEdit.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel_3.add(btnActionEdit);
 		
-		JToggleButton btnLine = new JToggleButton("Line");
-		btnsShapes.add(btnLine);
-		panel_3.add(btnLine);
+		btnActionDelete.addActionListener(btnActionDeleteClickListener());
+		btnActionDelete.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panel_3.add(btnActionDelete);
 		
-		JToggleButton btnRectangle = new JToggleButton("Rectangle");
-		btnsShapes.add(btnRectangle);
-		panel_3.add(btnRectangle);
 		
-		JToggleButton btnCircle = new JToggleButton("Circle");
-		btnsShapes.add(btnCircle);
-		panel_3.add(btnCircle);
+		JPanel panel_4 = new JPanel();
+		panel_1.add(panel_4);
+		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.Y_AXIS));
 		
-		JToggleButton btnDonut = new JToggleButton("Donut");
-		btnsShapes.add(btnDonut);
-		panel_3.add(btnDonut);
+		btnShapePoint.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnsShapes.add(btnShapePoint);
+		panel_4.add(btnShapePoint);
+		
+		btnShapeLine.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnsShapes.add(btnShapeLine);
+		panel_4.add(btnShapeLine);
+		
+		btnShapeRectangle.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnsShapes.add(btnShapeRectangle);
+		panel_4.add(btnShapeRectangle);
+		
+		btnShapeCircle.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnsShapes.add(btnShapeCircle);
+		panel_4.add(btnShapeCircle);
+		
+		btnShapeDonut.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnsShapes.add(btnShapeDonut);
+		panel_4.add(btnShapeDonut);
 		
 		btnOperationDrawing.setSelected(true);
 		setOperationDrawing();
-		
 		
 	}
 	
@@ -175,7 +184,7 @@ public class FrmDrawing extends JFrame {
 					return;
 				}
 				
-				if (btnPoint.isSelected()) {
+				if (btnShapePoint.isSelected()) {
 					DlgPoint dlgPoint = new DlgPoint();
 					dlgPoint.setPoint(mouseClick);
 					dlgPoint.setColors(edgeColor);
@@ -183,7 +192,7 @@ public class FrmDrawing extends JFrame {
 					if(dlgPoint.getPoint() != null) pnlDrawing.addShape(dlgPoint.getPoint());
 					return;
 					
-				} else if (btnLine.isSelected()) {
+				} else if (btnShapeLine.isSelected()) {
 					if(lineWaitingForEndPoint) {
 						
 						DlgLine dlgLine = new DlgLine();
@@ -200,7 +209,7 @@ public class FrmDrawing extends JFrame {
 					return;
 					
 		
-				} else if (btnRectangle.isSelected()) {
+				} else if (btnShapeRectangle.isSelected()) {
 					DlgRectangle dlgRectangle = new DlgRectangle();
 					dlgRectangle.setPoint(mouseClick);
 					dlgRectangle.setColors(edgeColor, innerColor);
@@ -208,7 +217,7 @@ public class FrmDrawing extends JFrame {
 					
 					if(dlgRectangle.getRectangle() != null) pnlDrawing.addShape(dlgRectangle.getRectangle());
 					return;
-				} else if (btnCircle.isSelected()) {
+				} else if (btnShapeCircle.isSelected()) {
 					DlgCircle dlgCircle = new DlgCircle();
 					dlgCircle.setPoint(mouseClick);
 					dlgCircle.setColors(innerColor, edgeColor);
@@ -216,7 +225,7 @@ public class FrmDrawing extends JFrame {
 					
 					if(dlgCircle.getCircle() != null) pnlDrawing.addShape(dlgCircle.getCircle());
 					return;
-				} else if (btnDonut.isSelected()) {
+				} else if (btnShapeDonut.isSelected()) {
 					DlgDonut dlgDonut = new DlgDonut();
 					dlgDonut.setPoint(mouseClick);
 					dlgDonut.setColors(edgeColor, innerColor);
@@ -292,7 +301,7 @@ public class FrmDrawing extends JFrame {
 		return new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (pnlDrawing.isEmpty()) return;
-				if (JOptionPane.showConfirmDialog(null, "Are you sure that you want to delete the selected shape?", "Yes", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 0) pnlDrawing.removeSelected(); 
+				if (JOptionPane.showConfirmDialog(null, "Do you really want to delete selected shape?", "Yes", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 0) pnlDrawing.removeSelected();
 			}
 		};
 	}
@@ -324,15 +333,14 @@ public class FrmDrawing extends JFrame {
 		btnActionEdit.setEnabled(false);
 		btnActionDelete.setEnabled(false);
 		
-		btnPoint.setEnabled(true);
-		btnLine.setEnabled(true);
-		btnRectangle.setEnabled(true);
-		btnCircle.setEnabled(true);
-		btnDonut.setEnabled(true);
+		btnShapePoint.setEnabled(true);
+		btnShapeLine.setEnabled(true);
+		btnShapeRectangle.setEnabled(true);
+		btnShapeCircle.setEnabled(true);
+		btnShapeDonut.setEnabled(true);
 		
 		btnColorEdge.setEnabled(true);
 		btnColorInner.setEnabled(true);
-	
 	}
 	
 	private void setOperationEditDelete() {
@@ -341,16 +349,14 @@ public class FrmDrawing extends JFrame {
 		btnActionEdit.setEnabled(true);
 		btnActionDelete.setEnabled(true);
 		
-		btnPoint.setEnabled(false);
-		btnLine.setEnabled(false);
-		btnRectangle.setEnabled(false);
-		btnCircle.setEnabled(false);
-		btnDonut.setEnabled(false);
+		btnShapePoint.setEnabled(false);
+		btnShapeLine.setEnabled(false);
+		btnShapeRectangle.setEnabled(false);
+		btnShapeCircle.setEnabled(false);
+		btnShapeDonut.setEnabled(false);
 		
 		btnColorEdge.setEnabled(false);
 		btnColorInner.setEnabled(false);
-	
 	}
-
-	
 }
+

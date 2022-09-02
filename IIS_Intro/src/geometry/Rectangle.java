@@ -31,17 +31,21 @@ public class Rectangle extends SurfShape{
 	}
 	
 	public Rectangle(Point upperLeftPoint, int width, int height, Color color, Color innerColor) {
-		this(upperLeftPoint, width, height);
+		this.upperLeftPoint = upperLeftPoint;
+		this.width = width;
+		this.height = height;
 		this.setColor(color);
 		this.setInnerColor(innerColor);
 
 	}
 	
 	public Rectangle(Point upperLeftPoint, int width, int height, boolean selected, Color color, Color innerColor) {
-		this(upperLeftPoint, width, height, selected);
+		this.upperLeftPoint = upperLeftPoint;
+		this.width = width;
+		this.height = height;
+		this.selected = selected;
 		this.setColor(color);
 		this.setInnerColor(innerColor);
-
 	}
 
 

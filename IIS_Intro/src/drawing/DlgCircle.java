@@ -47,6 +47,10 @@ public class DlgCircle extends JDialog {
 		this.innerColor = innerColor;
 	}
 
+	public void setPoint(Point point) {
+		txtX.setText("" + circle.getCenter().getX());
+		txtY.setText("" + circle.getCenter().getY());
+	}
 
 	private Circle circle = null;
 	private Color edgeColor = null;

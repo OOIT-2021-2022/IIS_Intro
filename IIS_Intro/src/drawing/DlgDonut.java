@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import geometry.Donut;
+import geometry.Point;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -18,7 +19,6 @@ import javax.swing.JOptionPane;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Point;
 
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -43,12 +43,12 @@ public class DlgDonut extends JDialog {
 		return donut;
 	}
 	
-	private void setPoint(Point point) {
+	public void setPoint(Point point) {
 		txtX.setText("" + point.getX());
 		txtY.setText("" + point.getY());
 	}
 	
-	private void setColors(Color edgeColor, Color innerColor) {
+	public void setColors(Color edgeColor, Color innerColor) {
 		this.edgeColor = edgeColor;
 		this.innerColor = innerColor;
 		

@@ -10,6 +10,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import geometry.Point;
 import geometry.Rectangle;
 
 import java.awt.GridBagLayout;
@@ -18,7 +19,6 @@ import javax.swing.JOptionPane;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Point;
 
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
