@@ -3,6 +3,7 @@ package geometry;
 public class Test {
 
 	public static void main(String[] args) {
+		/* Point test 
 		Point p1 = new Point();
 		p1.setX(3);
 		p1.setY(5);
@@ -20,6 +21,20 @@ public class Test {
 		System.out.println("Udaljenost je: " + p1.distance(p2.getX(), p2.getY()));
 		p1.setX(p2.getX());
 		System.out.println("Udaljenost je: " + p1.distance(p2.getX(), p2.getY()));
+		*/
+		
+		Point A = new Point();
+		A.setX(3);
+		A.setY(5);
+		Point B = new Point();
+		B.setX(6);
+		B.setY(6);
+		
+		Line l1 = new Line();
+		l1.setStartPoint(A);
+		l1.setEndPoint(B);
+		
+		System.out.println(l1.length());
 	}
 
 }

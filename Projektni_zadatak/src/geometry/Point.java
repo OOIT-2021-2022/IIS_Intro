@@ -28,7 +28,7 @@ public class Point {
 		y = newY;
 	}
 	
-	public boolean getSelected() {
+	public boolean isSelected() {
 		return selected;
 	}
 	
