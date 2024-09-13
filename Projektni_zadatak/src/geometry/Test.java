@@ -23,6 +23,7 @@ public class Test {
 		System.out.println("Udaljenost je: " + p1.distance(p2.getX(), p2.getY()));
 		*/
 		
+		/* Line test
 		Point A = new Point();
 		A.setX(3);
 		A.setY(5);
@@ -35,6 +36,23 @@ public class Test {
 		l1.setEndPoint(B);
 		
 		System.out.println(l1.length());
+		*/
+		
+		/*
+		Point p1 = new Point();
+		p1.setX(5);
+		p1.setY(5);
+		
+		Rectangle r1 = new Rectangle();
+		r1.setUpperLeftPoint(p1);
+		r1.setWidth(30);
+		r1.setHeight(15);
+		System.out.println(r1.area());
+		System.out.println(r1.circumference());
+		*/
+		
+		
+		
 	}
 
 }
