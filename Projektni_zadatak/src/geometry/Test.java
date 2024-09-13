@@ -38,7 +38,7 @@ public class Test {
 		System.out.println(l1.length());
 		*/
 		
-		/*
+		/* Rectangle test
 		Point p1 = new Point();
 		p1.setX(5);
 		p1.setY(5);
@@ -51,6 +51,17 @@ public class Test {
 		System.out.println(r1.circumference());
 		*/
 		
+		Point p = new Point();
+		p.setX(5);
+		p.setY(5);
+		
+		Circle c1 = new Circle();
+		c1.setCenter(p);
+		c1.setRadius(10);
+		c1.setSelected(true);
+		
+		System.out.println(c1.area());
+		System.out.println(c1.circumference());
 		
 		
 	}
