@@ -10,7 +10,7 @@ public class Line {
 	}
 	
 	public Point getStartPoint() {
-		return startPoint;
+		return this.startPoint;
 	}
 	
 	public void setStartPoint(Point startPoint) {
@@ -18,7 +18,7 @@ public class Line {
 	}
 	
 	public Point getEndPoint() {
-		return endPoint;
+		return this.endPoint;
 	}
 	
 	public void setEndPoint(Point endPoint) {
