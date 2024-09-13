@@ -84,7 +84,7 @@ public class Variables {
 			System.out.println("Kvadrat broja " + i + " je: " + i*i);
 		*/
 		
-		/*
+		/* while
 		int i = 0;
 		while (i < 10) {
 			System.out.println("Kvadrat broja " + i + " je: " + i*i);
@@ -92,7 +92,7 @@ public class Variables {
 		}
 		*/
 		
-		/*
+		/* do while
 		int i = 0;
 		do {
 			System.out.println("Kvadrat broja " + i + " je: " + i*i);
