@@ -1,7 +1,7 @@
 package geometry;
 
 public class Circle {
-	private Point center;
+	protected Point center;
 	private int radius;
 	private boolean selected;
 	

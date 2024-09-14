@@ -184,6 +184,7 @@ public class Test {
 		System.out.println(r.contains(6, 1));
 		*/
 		
+		/* testiranje contains(Point)
 		Point p = new Point(3,3);
 		Rectangle r = new Rectangle(p,10,10);
 		System.out.println(r.contains(new Point(2,3)));
@@ -191,6 +192,16 @@ public class Test {
 		Circle c = new Circle(p,5);
 		System.out.println(c.contains(2, 1));
 		System.out.println(c.contains(new Point(4,4)));
+		*/
+		
+		Point p = new Point(2,2);
+		Donut d = new Donut(p,10,3);
+		System.out.println(d.contains(new Point(5,5)));
+		
+		System.out.println(d.area());
+		System.out.println(d.toString());
+		System.out.println(d.contains(5, 5));
+		System.out.println(d.equals(new Donut(new Point(2,2),10,3)));
 	}
 
 }
