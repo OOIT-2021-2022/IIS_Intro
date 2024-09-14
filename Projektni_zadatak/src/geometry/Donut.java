@@ -43,6 +43,12 @@ public class Donut extends Circle{
 		return super.area() - this.innerRadius * this.innerRadius * Math.PI;
 	}
 	
+	@Override
+	public void draw(Graphics g) {
+		super.draw(g);
+		g.drawOval(center.getX()-innerRadius, center.getY()-innerRadius, innerRadius*2, innerRadius*2);
+	}
+	
 	public int getInnerRadius() {
 		return this.innerRadius;
 	}
