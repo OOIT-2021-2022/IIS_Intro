@@ -48,6 +48,19 @@ public class Point {
 		return "(" + x + "," + y + ")"; 
 	}
 	
+	public boolean equals(Object obj) {
+		if (obj instanceof Point) {
+			Point pomocna = (Point) obj;
+			if (this.x == pomocna.x && this.y == pomocna.y)
+				return true;
+			else
+				return false;
+		}
+		else
+			return false;
+		}
+
+	
 	public boolean isSelected() {
 		return selected;
 	}

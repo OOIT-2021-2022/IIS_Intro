@@ -44,6 +44,17 @@ public class Line {
 	+ "(" + this.endPoint.getX() + "," + this.endPoint.getY() + ")";
 	}
 	
+	public boolean equals(Object obj) {
+		if(obj instanceof Line) {
+			Line pomocna = (Line) obj;
+			if(this.startPoint.equals(pomocna.startPoint) && this.endPoint.equals(pomocna.endPoint))
+				return true;
+			else
+				return false;
+		}
+		return false;
+	}
+	
 	public boolean isSelected() {
 		return selected;
 	}

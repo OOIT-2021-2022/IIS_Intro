@@ -139,6 +139,7 @@ public class Test {
 		System.out.println(r1.getUpperLeftPoint().getX());	
 		*/
 		
+		/* testiranje redefinisane toString() metode
 		Point p = new Point(3,4);
 		System.out.println(p.toString());
 		Point p2 = new Point(6,7);
@@ -146,7 +147,21 @@ public class Test {
 		System.out.println(l.toString());
 		Rectangle r = new Rectangle(p2,20,15);
 		System.out.println(r.toString());
-	
+		*/
+		
+		Point p = new Point(5,5);
+		Point p2 = new Point(5,5);
+		System.out.println(p == p2);
+		System.out.println(p.equals(p2));
+		
+		Point p3 = new Point(3,1);
+		Line l1 = new Line(p,p2);
+		Line l2 = new Line(p,p2);
+		System.out.println(l1.equals(l2));
+		
+		Rectangle r1 = new Rectangle(p,10,15);
+		Rectangle r2 = new Rectangle(p3,10,15);
+		System.out.println(r1.equals(r2));
 	}
 
 }

@@ -58,6 +58,20 @@ public class Rectangle {
 	this.width + ", height = " + this.height;
 	}
 	
+	public boolean equals (Object obj) {
+		if (obj instanceof Rectangle) {
+			Rectangle pomocna = (Rectangle) obj;
+			if (this.getUpperLeftPoint().equals(pomocna.upperLeftPoint) 
+				&& this.getWidth() == pomocna.getWidth() 
+				&& this.getHeight() == pomocna.getHeight())
+				return true;
+			else
+				return false;
+		}
+		else
+			return false;
+	}
+	
 	public boolean isSelected() {
 		return selected;
 	}
