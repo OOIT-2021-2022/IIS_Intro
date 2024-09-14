@@ -205,7 +205,29 @@ public class Test {
 		System.out.println(d.equals(new Donut(new Point(2,2),10,3)));
 		*/
 		
+		Point p = new Point(2,2);
+		p.moveBy(4, 1);
+		System.out.println(p);
 		
+		Line l = new Line(p, new Point(6,6));
+		System.out.println(l);
+		l.moveBy(1, 2);
+		System.out.println(l);
+		l.moveTo(1, 1);
+		System.out.println(l);
+		System.out.println(p);
+		
+		Rectangle r = new Rectangle(p, 20, 10);
+		r.moveTo(4, 4);
+		System.out.println(r);
+		r.moveBy(6, 6);
+		System.out.println(r);
+		
+		Donut d = new Donut(p,10,2);
+		d.moveTo(2, 2);
+		System.out.println(d);
+		d.moveBy(4, 1);
+		System.out.println(d);
 	}
 
 }

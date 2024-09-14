@@ -72,5 +72,17 @@ public class Circle extends Shape{
 	public boolean contains(Point clickPoint) {
 		return center.distance(clickPoint.getX(), clickPoint.getY()) <= radius;
 	}
+
+	@Override
+	public void moveTo(int x, int y) {
+		center.moveTo(x, y);
+		
+	}
+
+	@Override
+	public void moveBy(int x, int y) {
+		center.moveBy(x, y);
+		
+	}
 	
 }

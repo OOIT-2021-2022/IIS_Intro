@@ -25,6 +25,7 @@ public class Line extends Shape{
 		return this.startPoint.distance(this.endPoint.getX(), this.endPoint.getY());
 	}
 	
+	
 	@Override
 	public void draw(Graphics g) {
 		g.drawLine(startPoint.getX(), startPoint.getY(), endPoint.getX(), endPoint.getY());
@@ -64,6 +65,20 @@ public class Line extends Shape{
 	
 	public boolean contains(int x, int y) {
 		return this.startPoint.distance(x, y) + this.endPoint.distance(x, y) - length() <=1;
+	}
+
+	@Override
+	public void moveTo(int x, int y) {
+		startPoint.moveTo(x, y);
+		endPoint.moveTo(x, y);
+		
+	}
+
+	@Override
+	public void moveBy(int x, int y) {
+		startPoint.moveBy(x, y);
+		endPoint.moveBy(x, y);
+		
 	}
 	
 	

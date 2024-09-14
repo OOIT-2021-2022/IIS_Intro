@@ -20,8 +20,6 @@ public class Point extends Shape{
 		setSelected(selected);
 	}
 	
-	
-	
 	public double distance(int x, int y) {
 		int dX = this.x - x;
 		int dY = this.y - y;
@@ -69,6 +67,18 @@ public class Point extends Shape{
 	
 	public boolean contains(int x, int y) {
 		return this.distance(x, y) <= 1;
+	}
+
+	@Override
+	public void moveTo(int x, int y) {
+		this.setX(x);
+		this.y = y;
+	}
+
+	@Override
+	public void moveBy(int x, int y) {
+		this.setX(this.x + x);
+		this.y += y;
 	}
 	
 	

@@ -30,11 +30,6 @@ public class Rectangle extends Shape {
 		return this.width * 2 + this.height * 2;
 	}
 	
-	@Override
-	public void draw(Graphics g) {
-		g.drawRect(upperLeftPoint.getX(), upperLeftPoint.getY(), width, height);
-	}
-	
 	public Point getUpperLeftPoint() {
 		return this.upperLeftPoint;
 	}
@@ -87,6 +82,22 @@ public class Rectangle extends Shape {
 		return this.getUpperLeftPoint().getX() <= clickPoint.getX() && this.getUpperLeftPoint().getY() <= clickPoint.getY() 
 				&& this.getUpperLeftPoint().getX() + this.width >= clickPoint.getX() 
 				&& this.getUpperLeftPoint().getY() + this.height >= clickPoint.getY();
+	}
+
+	@Override
+	public void moveTo(int x, int y) {
+		upperLeftPoint.moveTo(x, y);
+	}
+
+	@Override
+	public void moveBy(int x, int y) {
+		upperLeftPoint.moveBy(x, y);
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		g.drawRect(upperLeftPoint.getX(), upperLeftPoint.getY(), width, height);
+		
 	}
 	
 }
