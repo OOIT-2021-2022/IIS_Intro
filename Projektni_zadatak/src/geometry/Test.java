@@ -205,6 +205,7 @@ public class Test {
 		System.out.println(d.equals(new Donut(new Point(2,2),10,3)));
 		*/
 		
+		/* Testiranje Moveable (moveBy i moveTo)
 		Point p = new Point(2,2);
 		p.moveBy(4, 1);
 		System.out.println(p);
@@ -228,6 +229,11 @@ public class Test {
 		System.out.println(d);
 		d.moveBy(4, 1);
 		System.out.println(d);
+		*/
+		
+		Point p = new Point(10,10);
+		int n = p.compareTo(new Point(15,15));
+		System.out.println(n);
 	}
 
 }

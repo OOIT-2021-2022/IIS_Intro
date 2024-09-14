@@ -80,6 +80,15 @@ public class Line extends Shape{
 		endPoint.moveBy(x, y);
 		
 	}
+
+	@Override
+	public int compareTo(Object obj) {
+		if(obj instanceof Line) {
+			Line lineToCompare = (Line)obj;
+			return (int)(this.length() - lineToCompare.length());
+		}
+		return 0;
+	}
 	
 	
 }

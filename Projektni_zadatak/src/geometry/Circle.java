@@ -84,5 +84,14 @@ public class Circle extends Shape{
 		center.moveBy(x, y);
 		
 	}
+
+	@Override
+	public int compareTo(Object o) {
+		if(o instanceof Circle) {
+			Circle circleToCompare = (Circle)o;
+			return (int)(this.area() - circleToCompare.area());
+		}
+		return 0;
+	}
 	
 }

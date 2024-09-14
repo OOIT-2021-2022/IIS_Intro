@@ -99,5 +99,14 @@ public class Rectangle extends Shape {
 		g.drawRect(upperLeftPoint.getX(), upperLeftPoint.getY(), width, height);
 		
 	}
+
+	@Override
+	public int compareTo(Object o) {
+		if(o instanceof Rectangle) {
+			Rectangle recToCompare = (Rectangle)o;
+			return (int)(this.area() - recToCompare.area());
+		}
+		return 0;
+	}
 	
 }
