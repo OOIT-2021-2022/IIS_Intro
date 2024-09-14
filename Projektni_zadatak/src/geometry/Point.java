@@ -18,7 +18,7 @@ public class Point extends Shape{
 	
 	public Point(int x, int y, boolean selected) {
 		this(x, y);
-		this.selected = selected;
+		setSelected(selected);
 	}
 	
 	
@@ -28,6 +28,12 @@ public class Point extends Shape{
 		int dY = this.y - y;
 		double d = Math.sqrt(dX*dX + dY*dY);
 		return d;
+	}
+	
+	@Override
+	public void draw(Graphics g) {
+		g.drawLine(x - 2, y, x + 2, y);
+		g.drawLine(x, y - 2, x, y + 2);
 	}
 	
 	public int getX() {

@@ -20,7 +20,7 @@ public class Rectangle extends Shape {
 	
 	public Rectangle(Point upperLeftPoint, int width, int height, boolean selected) {
 		this (upperLeftPoint, width, height);
-		this.selected = selected;
+		setSelected(selected);
 	}
 	
 	public double area() {

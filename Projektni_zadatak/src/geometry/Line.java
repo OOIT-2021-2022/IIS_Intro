@@ -17,8 +17,9 @@ public class Line extends Shape{
 	}
 	
 	public Line(Point startPoint, Point endPoint, boolean selected) {
-		this (startPoint, endPoint);
-		this.selected = selected;
+		super(selected); // moze i setSelected(selected);
+		this.startPoint = startPoint;
+		this.endPoint = endPoint;
 	}
 	
 	public double length() {

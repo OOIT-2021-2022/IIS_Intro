@@ -18,7 +18,7 @@ public class Circle extends Shape{
 	
 	public Circle(Point center, int radius, boolean selected) {
 		this (center, radius);
-		this.selected = selected;
+		setSelected(selected);
 	}
 	
 	public double circumference() {
