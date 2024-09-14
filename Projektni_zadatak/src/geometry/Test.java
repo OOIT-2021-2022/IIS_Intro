@@ -66,6 +66,8 @@ public class Test {
 		System.out.println(c1.circumference());
 		*/
 		
+		/*
+		//vezbe 3 zadaci i domaci
 		Point point1 = new Point();
 		Point point2 = new Point();
 		Line line1 = new Line();
@@ -114,6 +116,26 @@ public class Test {
 		rect1.setWidth(20);
 		circle1.getCenter().setX((int)rect1.area() - line1.getStartPoint().getY());
 		System.out.println(circle1.getCenter().getX());
+		
+		
+		//vezbe 4 zadatak
+		System.out.println("End point: " + line1.getEndPoint().getX() + " " + line1.getEndPoint().getY());
+		System.out.println("Start point: " + line1.getStartPoint().getX() + " " + line1.getStartPoint().getY());
+		circle1.setRadius(10);
+		circle1.getCenter().setX((int)(circle1.getRadius() + line1.getStartPoint().distance(line1.getEndPoint().getX(), line1.getEndPoint().getY())));
+		System.out.println("Circle center: " + circle1.getCenter().getX() + " " + circle1.getCenter().getY());
+		*/
+		
+		Point p1 = new Point(10,12);
+		Point p2 = new Point(11,7,true);
+		System.out.println(p2.isSelected() + " " + p1.getX());
+		
+		Line l1 = new Line(p1, p2);
+		System.out.println("(" + l1.getEndPoint().getX() + ", " + l1.getEndPoint().getY() + ")");
+		
+		Rectangle r1 = new Rectangle(p1, 15, 10);
+		System.out.println("Rectangle area: " + r1.area());
+		System.out.println(r1.getUpperLeftPoint().getX());
 	}
 
 }

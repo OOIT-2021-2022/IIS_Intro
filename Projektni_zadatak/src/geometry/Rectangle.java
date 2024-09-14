@@ -6,6 +6,21 @@ public class Rectangle {
 	private int height;
 	private boolean selected;
 	
+	public Rectangle() {
+		
+	}
+	
+	public Rectangle(Point upperLeftPoint, int width, int height) {
+		this.upperLeftPoint = upperLeftPoint;
+		this.width = width;
+		this.height = height;
+	}
+	
+	public Rectangle(Point upperLeftPoint, int width, int height, boolean selected) {
+		this (upperLeftPoint, width, height);
+		this.selected = selected;
+	}
+	
 	public double area() {
 		return this.width * this.height;
 	}
