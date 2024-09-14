@@ -5,6 +5,20 @@ public class Circle {
 	private int radius;
 	private boolean selected;
 	
+	public Circle() {
+		
+	}
+	
+	public Circle(Point center, int radius) {
+		this.center = center;
+		this.radius = radius;
+	}
+	
+	public Circle(Point center, int radius, boolean selected) {
+		this (center, radius);
+		this.selected = selected;
+	}
+	
 	public double circumference() {
 		return 2 * this.radius * Math.PI;
 	}
@@ -27,6 +41,22 @@ public class Circle {
 	
 	public void setRadius(int radius) {
 		this.radius = radius;
+	}
+	
+	public String toString() {
+		return "Center: (" + this.getCenter().getX() + "," + this.getCenter().getY() + "), radius= " + this.radius;
+	}
+	
+	public boolean equals(Object obj) {
+		if(obj instanceof Circle) {
+			Circle pomocna = (Circle) obj;
+			if(this.center.equals(pomocna.center) && this.radius == pomocna.radius)
+				return true;
+			else
+				return false;
+		}
+		else
+			return false;
 	}
 	
 	public boolean isSelected() {

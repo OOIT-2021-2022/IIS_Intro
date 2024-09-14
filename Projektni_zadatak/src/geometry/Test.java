@@ -149,6 +149,7 @@ public class Test {
 		System.out.println(r.toString());
 		*/
 		
+		/* testiranje redefinisane equals() metode
 		Point p = new Point(5,5);
 		Point p2 = new Point(5,5);
 		System.out.println(p == p2);
@@ -162,6 +163,15 @@ public class Test {
 		Rectangle r1 = new Rectangle(p,10,15);
 		Rectangle r2 = new Rectangle(p3,10,15);
 		System.out.println(r1.equals(r2));
+		*/
+		
+		Point p = new Point(2,2);
+		Circle c = new Circle(p,5);
+		System.out.println(c.toString());
+		Circle c2 = new Circle(p,5);
+		System.out.println(c.equals(c2));
+		
+		
 	}
 
 }
