@@ -44,7 +44,7 @@ public class Circle {
 	}
 	
 	public String toString() {
-		return "Center: (" + this.getCenter().getX() + "," + this.getCenter().getY() + "), radius= " + this.radius;
+		return "Center=" + center + ", radius=" + radius;
 	}
 	
 	public boolean equals(Object obj) {

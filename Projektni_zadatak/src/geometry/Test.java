@@ -165,12 +165,22 @@ public class Test {
 		System.out.println(r1.equals(r2));
 		*/
 		
+		/* testiranje toString() i equals() za Circle
 		Point p = new Point(2,2);
 		Circle c = new Circle(p,5);
 		System.out.println(c.toString());
 		Circle c2 = new Circle(p,5);
 		System.out.println(c.equals(c2));
+		*/
 		
+		Point p = new Point(2,2);
+		System.out.println(p.contains(2, 1));
+		Point p1 = new Point(3,3);
+		Line l = new Line(p,p1);
+		System.out.println(l.contains(2, 4));
+		
+		Rectangle r = new Rectangle(p,10,10);
+		System.out.println(r.contains(6, 1));
 		
 	}
 
