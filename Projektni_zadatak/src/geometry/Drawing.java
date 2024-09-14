@@ -41,11 +41,11 @@ public class Drawing extends JPanel {
 		Shape shape2 = new Line(new Point(100, 100), new Point(200,200));
 		shape2.draw(g);
 		*/
-		Point p = new Point(20,20);
-		Line l = new Line(new Point(15,15), new Point(25,25));
-		Circle c = new Circle(new Point(30,30), 15);
-		Donut d = new Donut(new Point(10,10), 10, 2);
-		Rectangle r = new Rectangle(new Point(12,12), 40, 20);
+		Point p = new Point(20,20, true);
+		Line l = new Line(new Point(15,15), new Point(25,25), true);
+		Circle c = new Circle(new Point(30,30), 15, true);
+		Donut d = new Donut(new Point(10,10), 10, 2, true);
+		Rectangle r = new Rectangle(new Point(12,12), 40, 20, true);
 		ArrayList<Shape> shapes = new ArrayList<Shape>();
 		shapes.add(p);
 		shapes.add(l);
@@ -66,5 +66,13 @@ public class Drawing extends JPanel {
 		shapes.get(3).draw(g);
 		shapes.add(3, l);
 		shapes.get(3).draw(g);
+		
+		try {
+			c.setRadius(-10);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		p.draw(g);
 	}
 }

@@ -1,5 +1,6 @@
 package geometry;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class Circle extends Shape{
@@ -31,6 +32,16 @@ public class Circle extends Shape{
 	@Override
 	public void draw(Graphics g) {
 		g.drawOval(center.getX()-radius, center.getY()-radius, radius*2, radius*2);
+		
+		if (isSelected()) {
+			g.setColor(Color.BLUE);
+			g.drawRect(center.getX()-2, center.getY()-2, 4, 4);
+			g.drawRect(center.getX()-radius-2, center.getY()-2, 4, 4);
+			g.drawRect(center.getX()+radius-2, center.getY()-2, 4, 4);
+			g.drawRect(center.getX()-2, center.getY()-radius-2, 4, 4);
+			g.drawRect(center.getX()-2, center.getY()+radius-2, 4, 4);
+			g.setColor(Color.BLACK);
+		}
 	}
 	
 	public Point getCenter() {
@@ -45,7 +56,11 @@ public class Circle extends Shape{
 		return this.radius;
 	}
 	
-	public void setRadius(int radius) {
+	public void setRadius(int radius) throws Exception {
+		
+		if(radius < 0) {
+			throw new Exception("Radius has to be greater than 0!");
+		}
 		this.radius = radius;
 	}
 	
