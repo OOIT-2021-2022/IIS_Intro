@@ -173,6 +173,7 @@ public class Test {
 		System.out.println(c.equals(c2));
 		*/
 		
+		/* testiranje contains()
 		Point p = new Point(2,2);
 		System.out.println(p.contains(2, 1));
 		Point p1 = new Point(3,3);
@@ -181,7 +182,15 @@ public class Test {
 		
 		Rectangle r = new Rectangle(p,10,10);
 		System.out.println(r.contains(6, 1));
+		*/
 		
+		Point p = new Point(3,3);
+		Rectangle r = new Rectangle(p,10,10);
+		System.out.println(r.contains(new Point(2,3)));
+		
+		Circle c = new Circle(p,5);
+		System.out.println(c.contains(2, 1));
+		System.out.println(c.contains(new Point(4,4)));
 	}
 
 }

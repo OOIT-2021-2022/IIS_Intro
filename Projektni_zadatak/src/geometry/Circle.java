@@ -59,6 +59,14 @@ public class Circle {
 			return false;
 	}
 	
+	public boolean contains(int x, int y) {
+		return center.distance(x, y) <= radius;
+	}
+	
+	public boolean contains(Point clickPoint) {
+		return center.distance(clickPoint.getX(), clickPoint.getY()) <= radius;
+	}
+	
 	public boolean isSelected() {
 		return selected;
 	}

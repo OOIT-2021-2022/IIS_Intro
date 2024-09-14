@@ -77,6 +77,12 @@ public class Rectangle {
 				&& this.getUpperLeftPoint().getX() + this.width >= x && this.getUpperLeftPoint().getY() + this.height >= y;
 	}
 	
+	public boolean contains(Point clickPoint) {
+		return this.getUpperLeftPoint().getX() <= clickPoint.getX() && this.getUpperLeftPoint().getY() <= clickPoint.getY() 
+				&& this.getUpperLeftPoint().getX() + this.width >= clickPoint.getX() 
+				&& this.getUpperLeftPoint().getY() + this.height >= clickPoint.getY();
+	}
+	
 	public boolean isSelected() {
 		return selected;
 	}
