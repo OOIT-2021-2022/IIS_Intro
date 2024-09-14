@@ -20,6 +20,7 @@ public class Point {
 	}
 	
 	
+	
 	public double distance(int x, int y) {
 		int dX = this.x - x;
 		int dY = this.y - y;
@@ -41,6 +42,10 @@ public class Point {
 	
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public String toString() {
+		return "(" + x + "," + y + ")"; 
 	}
 	
 	public boolean isSelected() {

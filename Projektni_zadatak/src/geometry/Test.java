@@ -126,6 +126,7 @@ public class Test {
 		System.out.println("Circle center: " + circle1.getCenter().getX() + " " + circle1.getCenter().getY());
 		*/
 		
+		/* testiranje konstruktora
 		Point p1 = new Point(10,12);
 		Point p2 = new Point(11,7,true);
 		System.out.println(p2.isSelected() + " " + p1.getX());
@@ -135,7 +136,17 @@ public class Test {
 		
 		Rectangle r1 = new Rectangle(p1, 15, 10);
 		System.out.println("Rectangle area: " + r1.area());
-		System.out.println(r1.getUpperLeftPoint().getX());
+		System.out.println(r1.getUpperLeftPoint().getX());	
+		*/
+		
+		Point p = new Point(3,4);
+		System.out.println(p.toString());
+		Point p2 = new Point(6,7);
+		Line l = new Line(p,p2);
+		System.out.println(l.toString());
+		Rectangle r = new Rectangle(p2,20,15);
+		System.out.println(r.toString());
+	
 	}
 
 }

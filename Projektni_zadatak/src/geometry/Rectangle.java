@@ -53,6 +53,11 @@ public class Rectangle {
 		this.height = height;
 	}
 	
+	public String toString() {
+		return "Upper left point: " + "(" + this.upperLeftPoint.getX() + "," + this.getUpperLeftPoint().getY() + "), width = " + 
+	this.width + ", height = " + this.height;
+	}
+	
 	public boolean isSelected() {
 		return selected;
 	}

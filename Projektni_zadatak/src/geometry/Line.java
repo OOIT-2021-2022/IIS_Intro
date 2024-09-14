@@ -39,6 +39,11 @@ public class Line {
 		this.endPoint = endPoint;
 	}
 	
+	public String toString() {
+		return "(" + this.startPoint.getX() + "," + this.startPoint.getY() + ")" + "-->" 
+	+ "(" + this.endPoint.getX() + "," + this.endPoint.getY() + ")";
+	}
+	
 	public boolean isSelected() {
 		return selected;
 	}
