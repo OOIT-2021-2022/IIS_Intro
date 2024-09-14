@@ -1,6 +1,8 @@
 package geometry;
 
-public class Circle {
+import java.awt.Graphics;
+
+public class Circle extends Shape{
 	protected Point center;
 	private int radius;
 	private boolean selected;

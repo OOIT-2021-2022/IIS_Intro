@@ -1,6 +1,8 @@
 package geometry;
 
-public class Rectangle {
+import java.awt.Graphics;
+
+public class Rectangle extends Shape {
 	private Point upperLeftPoint;
 	private int width;
 	private int height;
@@ -27,6 +29,11 @@ public class Rectangle {
 	
 	public int circumference() {
 		return this.width * 2 + this.height * 2;
+	}
+	
+	@Override
+	public void draw(Graphics g) {
+		g.drawRect(upperLeftPoint.getX(), upperLeftPoint.getY(), width, height);
 	}
 	
 	public Point getUpperLeftPoint() {

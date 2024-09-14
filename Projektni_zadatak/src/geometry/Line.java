@@ -1,6 +1,8 @@
 package geometry;
 
-public class Line {
+import java.awt.Graphics;
+
+public class Line extends Shape{
 	private Point startPoint;
 	private Point endPoint;
 	private boolean selected;
@@ -21,6 +23,11 @@ public class Line {
 	
 	public double length() {
 		return this.startPoint.distance(this.endPoint.getX(), this.endPoint.getY());
+	}
+	
+	@Override
+	public void draw(Graphics g) {
+		g.drawLine(startPoint.getX(), startPoint.getY(), endPoint.getX(), endPoint.getY());
 	}
 	
 	public Point getStartPoint() {

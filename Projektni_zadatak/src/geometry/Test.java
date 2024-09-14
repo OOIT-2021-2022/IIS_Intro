@@ -194,6 +194,7 @@ public class Test {
 		System.out.println(c.contains(new Point(4,4)));
 		*/
 		
+		/* Testiranje Donut i svih njegovih metoda i konstruktora
 		Point p = new Point(2,2);
 		Donut d = new Donut(p,10,3);
 		System.out.println(d.contains(new Point(5,5)));
@@ -202,6 +203,9 @@ public class Test {
 		System.out.println(d.toString());
 		System.out.println(d.contains(5, 5));
 		System.out.println(d.equals(new Donut(new Point(2,2),10,3)));
+		*/
+		
+		
 	}
 
 }
