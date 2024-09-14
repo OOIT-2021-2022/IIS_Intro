@@ -238,7 +238,7 @@ public class Test {
 		System.out.println(n);
 		*/
 		
-		
+		/* testiranje nizova
 		Rectangle rec1 = new Rectangle(new Point(10,10), 20, 15);
 		Rectangle rec2 = new Rectangle(new Point(5,6), 30, 10);
 		Rectangle rec3 = new Rectangle(new Point(9,1), 12, 19);
@@ -254,7 +254,7 @@ public class Test {
 		for(int i = 0; i < rectangles.length; i++) {
 			System.out.println(rectangles[i]);
 		}
-		
+	`	*/	
 	}
 
 }

@@ -1,6 +1,9 @@
 package geometry;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.awt.Color;
 
 import javax.swing.JFrame;
@@ -14,7 +17,7 @@ public class Drawing extends JPanel {
 	}
 	
 	public static void main(String args[]) {
-		JFrame frame = new JFrame ("Drawing");
+		JFrame frame = new JFrame ("Drawing frame");
 		frame.setSize(800, 600);
 		JPanel drawing = new Drawing();
 		frame.getContentPane().add(drawing);
@@ -23,6 +26,7 @@ public class Drawing extends JPanel {
 	}
 	
 	public void paint(Graphics g) {
+		/* drawing
 		Point p = new Point(10,15);
 		g.setColor(Color.red);
 		p.draw(g);
@@ -36,5 +40,31 @@ public class Drawing extends JPanel {
 		shape1.draw(g);
 		Shape shape2 = new Line(new Point(100, 100), new Point(200,200));
 		shape2.draw(g);
+		*/
+		Point p = new Point(20,20);
+		Line l = new Line(new Point(15,15), new Point(25,25));
+		Circle c = new Circle(new Point(30,30), 15);
+		Donut d = new Donut(new Point(10,10), 10, 2);
+		Rectangle r = new Rectangle(new Point(12,12), 40, 20);
+		ArrayList<Shape> shapes = new ArrayList<Shape>();
+		shapes.add(p);
+		shapes.add(l);
+		shapes.add(c);
+		shapes.add(d);
+		shapes.add(r);
+		Iterator<Shape> it = shapes.iterator();
+		while(it.hasNext()) {
+			Shape sh = it.next();
+			sh.moveBy(10, 0);
+			System.out.println(sh);
+		}
+		shapes.get(3).draw(g);
+		shapes.get(shapes.size()-1).draw(g);
+		shapes.remove(1);
+		System.out.println(shapes);
+		shapes.get(1).draw(g);
+		shapes.get(3).draw(g);
+		shapes.add(3, l);
+		shapes.get(3).draw(g);
 	}
 }
