@@ -1,5 +1,6 @@
 package geometry;
 
+import java.util.Arrays;
 
 public class Test {
 
@@ -231,9 +232,29 @@ public class Test {
 		System.out.println(d);
 		*/
 		
+		/* Testiranje Comparable
 		Point p = new Point(10,10);
 		int n = p.compareTo(new Point(15,15));
 		System.out.println(n);
+		*/
+		
+		
+		Rectangle rec1 = new Rectangle(new Point(10,10), 20, 15);
+		Rectangle rec2 = new Rectangle(new Point(5,6), 30, 10);
+		Rectangle rec3 = new Rectangle(new Point(9,1), 12, 19);
+		
+		Rectangle[] rectangles = {rec1, rec2, rec3};
+		
+		for(int i = 0; i < rectangles.length; i++) {
+			System.out.println(rectangles[i]);
+		}
+		
+		Arrays.sort(rectangles);
+		System.out.println("\n");
+		for(int i = 0; i < rectangles.length; i++) {
+			System.out.println(rectangles[i]);
+		}
+		
 	}
 
 }
