@@ -29,6 +29,11 @@ public class Circle extends Shape{
 		return this.radius * this.radius * Math.PI;
 	}
 	
+	@Override
+	public void draw(Graphics g) {
+		g.drawOval(center.getX()-radius, center.getY()-radius, radius*2, radius*2);
+	}
+	
 	public Point getCenter() {
 		return this.center;
 	}
