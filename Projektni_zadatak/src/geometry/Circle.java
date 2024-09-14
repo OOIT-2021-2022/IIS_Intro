@@ -5,7 +5,6 @@ import java.awt.Graphics;
 public class Circle extends Shape{
 	protected Point center;
 	private int radius;
-	private boolean selected;
 	
 	public Circle() {
 		
@@ -73,14 +72,5 @@ public class Circle extends Shape{
 	public boolean contains(Point clickPoint) {
 		return center.distance(clickPoint.getX(), clickPoint.getY()) <= radius;
 	}
-	
-	public boolean isSelected() {
-		return selected;
-	}
-	
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
-	
 	
 }

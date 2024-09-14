@@ -5,7 +5,6 @@ import java.awt.Graphics;
 public class Line extends Shape{
 	private Point startPoint;
 	private Point endPoint;
-	private boolean selected;
 	
 	public Line() {
 		
@@ -67,12 +66,5 @@ public class Line extends Shape{
 		return this.startPoint.distance(x, y) + this.endPoint.distance(x, y) - length() <=1;
 	}
 	
-	public boolean isSelected() {
-		return selected;
-	}
 	
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
-
 }

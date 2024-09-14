@@ -13,6 +13,8 @@ public abstract class Shape {
 		this.selected = selected;
 	}
 	
+	
+	public abstract boolean contains(int x, int y);
 	public abstract void draw(Graphics g);
 	
 	public boolean isSelected() {

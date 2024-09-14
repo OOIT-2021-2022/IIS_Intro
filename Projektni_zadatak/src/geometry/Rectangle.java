@@ -6,7 +6,6 @@ public class Rectangle extends Shape {
 	private Point upperLeftPoint;
 	private int width;
 	private int height;
-	private boolean selected;
 	
 	public Rectangle() {
 		
@@ -90,11 +89,4 @@ public class Rectangle extends Shape {
 				&& this.getUpperLeftPoint().getY() + this.height >= clickPoint.getY();
 	}
 	
-	public boolean isSelected() {
-		return selected;
-	}
-	
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-	}
 }
