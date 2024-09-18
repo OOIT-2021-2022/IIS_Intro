@@ -34,6 +34,9 @@ import javax.swing.DefaultListModel;
 import javax.swing.JScrollPane;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JComboBox;
 
 public class FrmTest extends JFrame {
 
@@ -42,6 +45,7 @@ public class FrmTest extends JFrame {
 	private final ButtonGroup btnGroup = new ButtonGroup();
 	private DefaultListModel<String> dlm = new DefaultListModel<String>();
 	JList listBoje = new JList();
+	private JTextField txtUnosBoje;
 
 	/**
 	 * Launch the application.
@@ -133,9 +137,48 @@ public class FrmTest extends JFrame {
 		btnGroup.add(tglbtnZuta);
 		
 		JScrollPane scrlPaneBoje = new JScrollPane();
+		
+		JLabel lblUnosBoje = new JLabel("Unesi boju:");
+		
+		txtUnosBoje = new JTextField();
+		txtUnosBoje.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					dlm.addElement(txtUnosBoje.getText());
+				}
+			}
+		});
+		txtUnosBoje.setColumns(10);
+		
+		JLabel lblOdabirBoje = new JLabel("Odaberi boju: ");
+		
+		JComboBox cbxBoje = new JComboBox();
+		cbxBoje.addItem("Zelena");
+		cbxBoje.addItem("Narandzasta");
+		cbxBoje.addItem("Ljubicasta");
+		
+		JButton btnOdaberiBoju = new JButton("Dodaj");
+		btnOdaberiBoju.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dlm.addElement((String) cbxBoje.getSelectedItem());
+			}
+		});
+		
+		JButton btnIzbrisi = new JButton("Izbrisi");
+		btnIzbrisi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!listBoje.isSelectionEmpty()) {
+					dlm.removeElement(listBoje.getSelectedValue());
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Nije selektovana nijedna boja!", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		GroupLayout gl_pnlCenter = new GroupLayout(pnlCenter);
 		gl_pnlCenter.setHorizontalGroup(
-			gl_pnlCenter.createParallelGroup(Alignment.LEADING)
+			gl_pnlCenter.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_pnlCenter.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING, false)
@@ -147,10 +190,22 @@ public class FrmTest extends JFrame {
 						.addComponent(lblPlava, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(lblCrvena, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(lblZuta, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addContainerGap(562, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_pnlCenter.createSequentialGroup()
-					.addContainerGap(208, Short.MAX_VALUE)
-					.addComponent(scrlPaneBoje, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.TRAILING)
+						.addComponent(scrlPaneBoje, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_pnlCenter.createSequentialGroup()
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblOdabirBoje)
+								.addComponent(lblUnosBoje))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(txtUnosBoje)
+								.addComponent(cbxBoje, 0, 200, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnIzbrisi)
+								.addComponent(btnOdaberiBoju))
+							.addGap(4)))
 					.addGap(61))
 		);
 		gl_pnlCenter.setVerticalGroup(
@@ -159,15 +214,21 @@ public class FrmTest extends JFrame {
 					.addContainerGap()
 					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.BASELINE)
 						.addComponent(tglbtnCrvena)
-						.addComponent(lblCrvena))
+						.addComponent(lblCrvena)
+						.addComponent(lblUnosBoje)
+						.addComponent(txtUnosBoje, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.BASELINE)
 						.addComponent(tglbtnPlava)
-						.addComponent(lblPlava))
+						.addComponent(lblPlava)
+						.addComponent(lblOdabirBoje)
+						.addComponent(cbxBoje, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnOdaberiBoju))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.BASELINE)
 						.addComponent(tglbtnZuta)
-						.addComponent(lblZuta))
+						.addComponent(lblZuta)
+						.addComponent(btnIzbrisi))
 					.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
 					.addComponent(scrlPaneBoje, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
@@ -204,41 +265,4 @@ public class FrmTest extends JFrame {
 		
 		
 	}
-	
-	/* prvo sam pokusao preko novog JFrame-a uraditi Antistres dugme
-	private void openNewWindow() {
-		JFrame newWindow = new JFrame("Antistres");
-		newWindow.setSize(250, 150);
-		newWindow.setLocationRelativeTo(null);
-		newWindow.getContentPane().setLayout(new BorderLayout());
-		
-		Icon infoIcon = UIManager.getIcon("OptionPane.informationIcon");
-		
-		JLabel messageLabel = new JLabel("Antistres dugme", infoIcon, JLabel.CENTER);
-		messageLabel.setHorizontalTextPosition(JLabel.RIGHT);
-		messageLabel.setVerticalAlignment(JLabel.CENTER);
-		messageLabel.setHorizontalAlignment(JLabel.CENTER);
-		
-		newWindow.getContentPane().add(messageLabel, BorderLayout.CENTER);
-		
-		newWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		newWindow.setVisible(true);
-		
-		JButton okButton = new JButton("OK");
-		
-		okButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				newWindow.dispose();
-			}
-			
-		});
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.add(okButton);
-		newWindow.getContentPane().add(okButton, BorderLayout.SOUTH);
-		
-	}
-	*/
 }
