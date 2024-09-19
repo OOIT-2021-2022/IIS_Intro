@@ -146,6 +146,7 @@ public class FrmTest extends JFrame {
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					dlm.addElement(txtUnosBoje.getText());
+					txtUnosBoje.setText("");
 				}
 			}
 		});
@@ -153,7 +154,7 @@ public class FrmTest extends JFrame {
 		
 		JLabel lblOdabirBoje = new JLabel("Odaberi boju: ");
 		
-		JComboBox cbxBoje = new JComboBox();
+		JComboBox<String> cbxBoje = new JComboBox<String>();
 		cbxBoje.addItem("Zelena");
 		cbxBoje.addItem("Narandzasta");
 		cbxBoje.addItem("Ljubicasta");
@@ -177,19 +178,58 @@ public class FrmTest extends JFrame {
 			}
 		});
 		
+		JPanel pnlSouth = new JPanel();
+		contentPane.add(pnlSouth, BorderLayout.SOUTH);
+		
 		JButton btnRgbBoja = new JButton("Dodaj RGB");
 		btnRgbBoja.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				DlgTest dlgTest = new DlgTest();
 				dlgTest.setVisible(true);
 				if (dlgTest.isOk) {
-					String rgbColor = dlgTest.getTxtCrvena().getText() + " " + dlgTest.getTxtZelena().getText() + " " + dlgTest.getTxtPlava().getText();
-					dlm.addElement(rgbColor);
+					dlm.addElement(dlgTest.txtCrvena.getText() + " " + dlgTest.txtZelena.getText() + " " + dlgTest.txtPlava.getText());
+					pnlSouth.setBackground(new Color(Integer.parseInt(dlgTest.txtCrvena.getText()),
+							Integer.parseInt(dlgTest.txtZelena.getText()),
+							Integer.parseInt(dlgTest.txtPlava.getText())));
+							
 				}
 			}
 		});
 		
 		JButton btnIzmeniBoju = new JButton("Izmeni boju");
+		btnIzmeniBoju.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int indexOfSelectedElement = listBoje.getSelectedIndex();
+				System.out.println(indexOfSelectedElement);
+				if (indexOfSelectedElement < 0) {
+					JOptionPane.showMessageDialog(null, "Mora se selektovati element iz liste", "Message", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					String selectedElement = dlm.getElementAt(indexOfSelectedElement);
+					String [] rgbColors = selectedElement.split(" ");
+					DlgTest dlgIzmene = new DlgTest();
+					dlgIzmene.txtCrvena.setText(rgbColors[0]);
+					dlgIzmene.txtZelena.setText(rgbColors[1]);
+					dlgIzmene.txtPlava.setText(rgbColors[2]);
+					dlgIzmene.setVisible(true);
+					
+					if (dlgIzmene.isOk) {
+						String red = dlgIzmene.txtCrvena.getText();
+						String green = dlgIzmene.txtZelena.getText();
+						String blue = dlgIzmene.txtPlava.getText();
+						
+						String stringColor = red + " " + green + " " + blue;
+						dlm.setElementAt(stringColor, indexOfSelectedElement);
+						
+						Color color = new Color(Integer.parseInt(red),
+								Integer.parseInt(green),
+								Integer.parseInt(blue));
+						pnlCenter.setBackground(color);
+					}
+				}
+			}
+		});
 		GroupLayout gl_pnlCenter = new GroupLayout(pnlCenter);
 		gl_pnlCenter.setHorizontalGroup(
 			gl_pnlCenter.createParallelGroup(Alignment.TRAILING)
@@ -263,8 +303,6 @@ public class FrmTest extends JFrame {
 		scrlPaneBoje.setViewportView(listBoje);
 		pnlCenter.setLayout(gl_pnlCenter);
 		
-		JPanel pnlSouth = new JPanel();
-		contentPane.add(pnlSouth, BorderLayout.SOUTH);
 		
 		JButton btnKlikni = new JButton("Klikni me");
 		btnKlikni.addActionListener(new ActionListener() {

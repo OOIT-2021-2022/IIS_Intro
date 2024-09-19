@@ -105,18 +105,25 @@ public class DlgTest extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+					try {
 						if(Integer.parseInt(txtCrvena.getText())>0 && Integer.parseInt(txtCrvena.getText())<256) {
 							if(Integer.parseInt(txtZelena.getText())>0 && Integer.parseInt(txtZelena.getText())<256) {
 								if(Integer.parseInt(txtPlava.getText())>0 && Integer.parseInt(txtPlava.getText())<256) {
 									isOk = true;
 									setVisible(false);
+								}else {
+									JOptionPane.showMessageDialog(null, "Greska", "Message", JOptionPane.ERROR_MESSAGE);
 								}
+							}else {
+								JOptionPane.showMessageDialog(null, "Greska", "Message", JOptionPane.ERROR_MESSAGE);
 							}
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "Greska", "Message", JOptionPane.ERROR_MESSAGE);
 						}
-						
+					} catch (NumberFormatException e1) {
+						JOptionPane.showMessageDialog(null, "Unos mora biti broj", "Warning", JOptionPane.ERROR_MESSAGE);
+					}
 						
 					}
 				});
