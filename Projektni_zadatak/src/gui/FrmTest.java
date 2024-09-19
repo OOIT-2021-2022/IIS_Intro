@@ -176,21 +176,40 @@ public class FrmTest extends JFrame {
 				}
 			}
 		});
+		
+		JButton btnRgbBoja = new JButton("Dodaj RGB");
+		btnRgbBoja.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DlgTest dlgTest = new DlgTest();
+				dlgTest.setVisible(true);
+				if (dlgTest.isOk) {
+					String rgbColor = dlgTest.getTxtCrvena().getText() + " " + dlgTest.getTxtZelena().getText() + " " + dlgTest.getTxtPlava().getText();
+					dlm.addElement(rgbColor);
+				}
+			}
+		});
+		
+		JButton btnIzmeniBoju = new JButton("Izmeni boju");
 		GroupLayout gl_pnlCenter = new GroupLayout(pnlCenter);
 		gl_pnlCenter.setHorizontalGroup(
 			gl_pnlCenter.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_pnlCenter.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(tglbtnCrvena, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(tglbtnPlava, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(tglbtnZuta, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(lblPlava, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(lblCrvena, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(lblZuta, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_pnlCenter.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(tglbtnCrvena, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(tglbtnPlava, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(tglbtnZuta, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(lblPlava, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(lblCrvena, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(lblZuta, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+						.addComponent(btnRgbBoja))
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(btnIzmeniBoju)
+					.addGap(18)
 					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.TRAILING)
 						.addComponent(scrlPaneBoje, GroupLayout.PREFERRED_SIZE, 426, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_pnlCenter.createSequentialGroup()
@@ -230,8 +249,15 @@ public class FrmTest extends JFrame {
 						.addComponent(lblZuta)
 						.addComponent(btnIzbrisi))
 					.addPreferredGap(ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-					.addComponent(scrlPaneBoje, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addGroup(gl_pnlCenter.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_pnlCenter.createSequentialGroup()
+							.addComponent(scrlPaneBoje, GroupLayout.PREFERRED_SIZE, 243, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(Alignment.TRAILING, gl_pnlCenter.createSequentialGroup()
+							.addGroup(gl_pnlCenter.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnRgbBoja)
+								.addComponent(btnIzmeniBoju))
+							.addGap(113))))
 		);
 		
 		scrlPaneBoje.setViewportView(listBoje);
