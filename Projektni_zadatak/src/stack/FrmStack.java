@@ -5,16 +5,25 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Donut;
+
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmStack extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private DefaultListModel<Donut> dlm = new DefaultListModel<Donut>();
+	JList listDonut = new JList();
 
 	/**
 	 * Launch the application.
@@ -49,7 +58,6 @@ public class FrmStack extends JFrame {
 		JPanel pnlCenter = new JPanel();
 		contentPane.add(pnlCenter, BorderLayout.CENTER);
 		
-		JList listDonut = new JList();
 		GroupLayout gl_pnlCenter = new GroupLayout(pnlCenter);
 		gl_pnlCenter.setHorizontalGroup(
 			gl_pnlCenter.createParallelGroup(Alignment.LEADING)
@@ -71,9 +79,34 @@ public class FrmStack extends JFrame {
 		contentPane.add(pnlSouth, BorderLayout.SOUTH);
 		
 		JButton btnAddDonut = new JButton("Add Donut");
+		btnAddDonut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DlgStack dlgStack = new DlgStack(true);
+				dlgStack.setVisible(true);
+				int i = 0;
+				if(dlgStack.isOk()) {
+					dlm.add(i, dlgStack.getDonut());
+					i++;
+				}
+			}
+		});
 		pnlSouth.add(btnAddDonut);
 		
 		JButton btnDeleteDonut = new JButton("Delete Donut");
+		btnDeleteDonut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					if(!dlm.isEmpty()) {
+						DlgStack dlgStack = new DlgStack(false);
+						dlgStack.setDonut(dlm.getElementAt(0));
+						dlgStack.setVisible(true);
+						if(dlgStack.isOk()) {
+							dlm.removeElementAt(0);
+						}
+				}
+			}
+		});
 		pnlSouth.add(btnDeleteDonut);
+		
+		listDonut.setModel(dlm);
 	}
 }

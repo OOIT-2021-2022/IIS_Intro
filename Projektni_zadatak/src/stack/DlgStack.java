@@ -7,6 +7,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Donut;
+import geometry.Point;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -21,17 +25,30 @@ public class DlgStack extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtXCoordinate;
+	protected JTextField txtXCoordinate;
 	private JTextField txtYCoordinate;
 	private JTextField txtRadius;
 	private boolean isOk = false;
+	private Donut donut;
+	private JTextField txtInnerRadius;
+
+	public Donut getDonut() {
+		return donut;
+	}
+
+	public void setDonut(Donut donut) {
+		txtXCoordinate.setText(String.valueOf(donut.getCenter().getX()));
+		txtYCoordinate.setText(String.valueOf(donut.getCenter().getY()));
+		txtRadius.setText(String.valueOf(donut.getRadius()));
+		txtInnerRadius.setText(String.valueOf(donut.getInnerRadius()));
+	}
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			DlgStack dialog = new DlgStack();
+			DlgStack dialog = new DlgStack(true);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -42,7 +59,7 @@ public class DlgStack extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public DlgStack() {
+	public DlgStack(boolean isEditable) {
 		setModal(true);
 		setTitle("Donut");
 		setResizable(false);
@@ -62,6 +79,17 @@ public class DlgStack extends JDialog {
 		txtRadius = new JTextField();
 		txtRadius.setHorizontalAlignment(SwingConstants.TRAILING);
 		txtRadius.setColumns(10);
+		
+		JLabel lblInnerRadius = new JLabel("Inner radius:");
+		
+		txtInnerRadius = new JTextField();
+		txtInnerRadius.setHorizontalAlignment(SwingConstants.TRAILING);
+		txtInnerRadius.setColumns(10);
+		txtXCoordinate.setEditable(isEditable);
+		txtYCoordinate.setEditable(isEditable);
+		txtRadius.setEditable(isEditable);
+		txtInnerRadius.setEditable(isEditable);
+		
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -74,12 +102,14 @@ public class DlgStack extends JDialog {
 							.addComponent(txtXCoordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblInnerRadius)
 								.addComponent(lblYCoordinate)
 								.addComponent(lblRadius))
 							.addGap(18)
 							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 								.addComponent(txtRadius, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtYCoordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+								.addComponent(txtYCoordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtInnerRadius, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
 					.addContainerGap(264, Short.MAX_VALUE))
 		);
 		gl_contentPanel.setVerticalGroup(
@@ -97,7 +127,11 @@ public class DlgStack extends JDialog {
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblRadius)
 						.addComponent(txtRadius, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(143, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblInnerRadius)
+						.addComponent(txtInnerRadius, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(118, Short.MAX_VALUE))
 		);
 		contentPanel.setLayout(gl_contentPanel);
 		{
@@ -109,6 +143,10 @@ public class DlgStack extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
+							int x = Integer.parseInt(txtXCoordinate.getText());
+							int y = Integer.parseInt(txtYCoordinate.getText());
+							int radius = Integer.parseInt(txtRadius.getText());
+							int innerRadius = Integer.parseInt(txtInnerRadius.getText());
 							if(txtXCoordinate.getText().trim().isEmpty() || txtYCoordinate.getText().trim().isEmpty() || 
 									txtRadius.getText().trim().isEmpty()) {
 								JOptionPane.showMessageDialog(null, "Input cannot be empty!", "Warning", JOptionPane.ERROR_MESSAGE);
@@ -116,8 +154,10 @@ public class DlgStack extends JDialog {
 								else {
 									if (Integer.parseInt(txtXCoordinate.getText()) >= 0 && 
 											Integer.parseInt(txtYCoordinate.getText()) >= 0 &&
-											Integer.parseInt(txtRadius.getText()) > 0) {
+											Integer.parseInt(txtRadius.getText()) > 0 &&
+											Integer.parseInt(txtInnerRadius.getText()) > 0) {
 										isOk = true;
+										donut = new Donut(new Point(x,y), radius, innerRadius);
 										setVisible(false);
 									}
 									else {
