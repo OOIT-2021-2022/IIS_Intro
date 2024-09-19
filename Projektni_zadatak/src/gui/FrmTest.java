@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JToggleButton;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
@@ -201,7 +203,6 @@ public class FrmTest extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				int indexOfSelectedElement = listBoje.getSelectedIndex();
-				System.out.println(indexOfSelectedElement);
 				if (indexOfSelectedElement < 0) {
 					JOptionPane.showMessageDialog(null, "Mora se selektovati element iz liste", "Message", JOptionPane.ERROR_MESSAGE);
 				}
@@ -313,6 +314,16 @@ public class FrmTest extends JFrame {
 						JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
+		
+		JButton btnBojaPozadine = new JButton("Boja pozadine");
+		btnBojaPozadine.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Color backColor = JColorChooser.showDialog(null, "Choose background color", Color.black);
+				if (backColor != null)
+					pnlCenter.setBackground(backColor);
+			}
+		});
+		pnlSouth.add(btnBojaPozadine);
 		pnlSouth.add(btnKlikni);
 		
 		JPanel pnlNorth = new JPanel();
