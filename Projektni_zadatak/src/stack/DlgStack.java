@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -23,6 +24,7 @@ public class DlgStack extends JDialog {
 	private JTextField txtXCoordinate;
 	private JTextField txtYCoordinate;
 	private JTextField txtRadius;
+	private boolean isOk = false;
 
 	/**
 	 * Launch the application.
@@ -41,6 +43,9 @@ public class DlgStack extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgStack() {
+		setModal(true);
+		setTitle("Donut");
+		setResizable(false);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -101,6 +106,30 @@ public class DlgStack extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							if(txtXCoordinate.getText().trim().isEmpty() || txtYCoordinate.getText().trim().isEmpty() || 
+									txtRadius.getText().trim().isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Input cannot be empty!", "Warning", JOptionPane.ERROR_MESSAGE);
+							}
+								else {
+									if (Integer.parseInt(txtXCoordinate.getText()) >= 0 && 
+											Integer.parseInt(txtYCoordinate.getText()) >= 0 &&
+											Integer.parseInt(txtRadius.getText()) > 0) {
+										isOk = true;
+										setVisible(false);
+									}
+									else {
+										JOptionPane.showMessageDialog(null, "Input has to be greater than or equal (for coordinates) to 0!",
+												"Warning", JOptionPane.ERROR_MESSAGE);
+									}
+								}
+						} catch (NumberFormatException e1) {
+							JOptionPane.showMessageDialog(null, "Input has to be a number!", "Warning", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -140,6 +169,14 @@ public class DlgStack extends JDialog {
 
 	public void setTxtRadius(JTextField txtRadius) {
 		this.txtRadius = txtRadius;
+	}
+
+	public boolean isOk() {
+		return isOk;
+	}
+
+	public void setOk(boolean isOk) {
+		this.isOk = isOk;
 	}
 
 }
