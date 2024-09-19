@@ -5,16 +5,26 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Donut;
+
 import java.awt.BorderLayout;
+
+import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JList;
 
 public class FrmSort extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	private Donut donut;
+	JList listDonut = new JList();
+	private DefaultListModel<Donut> dlm = new DefaultListModel<Donut>();
 	/**
 	 * Launch the application.
 	 */
@@ -36,8 +46,9 @@ public class FrmSort extends JFrame {
 	 */
 	public FrmSort() {
 		setTitle("Ivan Stankovic IT-22/2020");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 700, 400);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -46,14 +57,21 @@ public class FrmSort extends JFrame {
 		
 		JPanel pnlCenter = new JPanel();
 		contentPane.add(pnlCenter, BorderLayout.CENTER);
+		
 		GroupLayout gl_pnlCenter = new GroupLayout(pnlCenter);
 		gl_pnlCenter.setHorizontalGroup(
 			gl_pnlCenter.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 717, Short.MAX_VALUE)
+				.addGroup(gl_pnlCenter.createSequentialGroup()
+					.addGap(48)
+					.addComponent(listDonut, GroupLayout.PREFERRED_SIZE, 470, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(56, Short.MAX_VALUE))
 		);
 		gl_pnlCenter.setVerticalGroup(
 			gl_pnlCenter.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 415, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, gl_pnlCenter.createSequentialGroup()
+					.addContainerGap(24, Short.MAX_VALUE)
+					.addComponent(listDonut, GroupLayout.PREFERRED_SIZE, 272, GroupLayout.PREFERRED_SIZE)
+					.addGap(22))
 		);
 		pnlCenter.setLayout(gl_pnlCenter);
 		
@@ -61,9 +79,19 @@ public class FrmSort extends JFrame {
 		contentPane.add(pnlSouth, BorderLayout.SOUTH);
 		
 		JButton btnAddDonut = new JButton("Add Donut");
+		btnAddDonut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DlgSort dlgSort = new DlgSort();
+				dlgSort.setVisible(true);
+				if(dlgSort.isOk()) {
+					dlm.addElement(dlgSort.getDonut());
+				}
+			}
+		});
 		pnlSouth.add(btnAddDonut);
 		
 		JButton btnSortDonut = new JButton("Sort Donut");
 		pnlSouth.add(btnSortDonut);
+		listDonut.setModel(dlm);
 	}
 }
