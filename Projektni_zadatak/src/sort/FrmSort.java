@@ -37,7 +37,7 @@ public class FrmSort extends JFrame {
 	public FrmSort() {
 		setTitle("Ivan Stankovic IT-22/2020");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 743, 464);
+		setBounds(100, 100, 700, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -56,6 +56,14 @@ public class FrmSort extends JFrame {
 				.addGap(0, 415, Short.MAX_VALUE)
 		);
 		pnlCenter.setLayout(gl_pnlCenter);
+		
+		JPanel pnlSouth = new JPanel();
+		contentPane.add(pnlSouth, BorderLayout.SOUTH);
+		
+		JButton btnAddDonut = new JButton("Add Donut");
+		pnlSouth.add(btnAddDonut);
+		
+		JButton btnSortDonut = new JButton("Sort Donut");
+		pnlSouth.add(btnSortDonut);
 	}
-
 }
