@@ -1,4 +1,4 @@
-package sort;
+package stack;
 
 import java.awt.EventQueue;
 
@@ -6,11 +6,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.JList;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
 
-public class FrmSort extends JFrame {
+public class FrmStack extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -22,7 +23,7 @@ public class FrmSort extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrmSort frame = new FrmSort();
+					FrmStack frame = new FrmStack();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,10 +35,11 @@ public class FrmSort extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrmSort() {
+	public FrmStack() {
 		setTitle("Ivan Stankovic IT-22/2020");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 743, 464);
+		setBounds(100, 100, 550, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -46,16 +48,32 @@ public class FrmSort extends JFrame {
 		
 		JPanel pnlCenter = new JPanel();
 		contentPane.add(pnlCenter, BorderLayout.CENTER);
+		
+		JList listDonut = new JList();
 		GroupLayout gl_pnlCenter = new GroupLayout(pnlCenter);
 		gl_pnlCenter.setHorizontalGroup(
 			gl_pnlCenter.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 717, Short.MAX_VALUE)
+				.addGroup(gl_pnlCenter.createSequentialGroup()
+					.addGap(62)
+					.addComponent(listDonut, GroupLayout.PREFERRED_SIZE, 402, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(60, Short.MAX_VALUE))
 		);
 		gl_pnlCenter.setVerticalGroup(
 			gl_pnlCenter.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 415, Short.MAX_VALUE)
+				.addGroup(gl_pnlCenter.createSequentialGroup()
+					.addGap(19)
+					.addComponent(listDonut, GroupLayout.PREFERRED_SIZE, 224, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(25, Short.MAX_VALUE))
 		);
 		pnlCenter.setLayout(gl_pnlCenter);
+		
+		JPanel pnlSouth = new JPanel();
+		contentPane.add(pnlSouth, BorderLayout.SOUTH);
+		
+		JButton btnAddDonut = new JButton("Add Donut");
+		pnlSouth.add(btnAddDonut);
+		
+		JButton btnDeleteDonut = new JButton("Delete Donut");
+		pnlSouth.add(btnDeleteDonut);
 	}
-
 }
