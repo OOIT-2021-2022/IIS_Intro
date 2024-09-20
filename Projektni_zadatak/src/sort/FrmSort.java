@@ -26,7 +26,6 @@ public class FrmSort extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private Donut donut;
 	JList<Donut> listDonut = new JList<>();
 	private DefaultListModel<Donut> dlm = new DefaultListModel<>();
 	/**

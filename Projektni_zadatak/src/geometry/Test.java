@@ -255,6 +255,7 @@ public class Test {
 			System.out.println(rectangles[i]);
 		}
 	`	*/	
+		/*
 		Donut d1 = new Donut(new Point(5,5), 10, 5);
 		Donut d2 = new Donut(new Point(5,5), 10, 2);
 		Donut d3 = new Donut(new Point(5,5), 10, 7);
@@ -268,6 +269,7 @@ public class Test {
 		for (int i = 0; i < donuts.length; i++) {
 			System.out.println(donuts[i]);
 		}
+		*/
 	}
 
 }
