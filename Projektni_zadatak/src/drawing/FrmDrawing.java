@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Point;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
@@ -20,11 +23,18 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FrmDrawing extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private Color edgeColor = Color.BLACK;
+	private Color innerColor = Color.WHITE;
+	private PnlDrawing pnlDrawing;
+	private Point startPoint;
 
 	/**
 	 * Launch the application.
@@ -56,10 +66,13 @@ public class FrmDrawing extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel pnlCenter = new JPanel();
-		contentPane.add(pnlCenter, BorderLayout.CENTER);
+		pnlDrawing = new PnlDrawing();
+		pnlDrawing.addMouseListener(pnlDrawClickListener());
+		contentPane.add(pnlDrawing, BorderLayout.CENTER);
 		
 		JPanel pnlWest = new JPanel();
+		pnlWest.setBackground(Color.LIGHT_GRAY);
+		pnlWest.repaint();
 		contentPane.add(pnlWest, BorderLayout.WEST);
 		pnlWest.setLayout(new GridLayout(0, 1));
 		
@@ -123,5 +136,9 @@ public class FrmDrawing extends JFrame {
 					.addGap(183))
 		);
 		pnlShapes.setLayout(gl_pnlShapes);
+	}
+	
+	private MouseAdapter pnlDrawClickListener() {
+		
 	}
 }
