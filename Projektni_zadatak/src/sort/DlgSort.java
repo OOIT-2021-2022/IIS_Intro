@@ -146,9 +146,15 @@ public class DlgSort extends JDialog {
 								else {
 									if (Integer.parseInt(txtRadius.getText()) > 0 &&
 											Integer.parseInt(txtInnerRadius.getText()) > 0) {
+										if(Integer.parseInt(txtRadius.getText()) <= Integer.parseInt(txtInnerRadius.getText())) {
+											JOptionPane.showMessageDialog(null, "Inner Radius cannot be greater than or equal to Radius!", "Warning",
+													JOptionPane.ERROR_MESSAGE);
+										}
+										else {
 										isOk = true;
 										donut = new Donut(new Point(x,y), radius, innerRadius);
 										setVisible(false);
+										}
 									}
 									else {
 										JOptionPane.showMessageDialog(null, "Input has to be greater than or equal (for coordinates) to 0!",

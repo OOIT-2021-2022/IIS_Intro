@@ -15,6 +15,10 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.awt.event.ActionEvent;
 import javax.swing.JList;
 
@@ -23,8 +27,8 @@ public class FrmSort extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Donut donut;
-	JList listDonut = new JList();
-	private DefaultListModel<Donut> dlm = new DefaultListModel<Donut>();
+	JList<Donut> listDonut = new JList<>();
+	private DefaultListModel<Donut> dlm = new DefaultListModel<>();
 	/**
 	 * Launch the application.
 	 */
@@ -91,6 +95,19 @@ public class FrmSort extends JFrame {
 		pnlSouth.add(btnAddDonut);
 		
 		JButton btnSortDonut = new JButton("Sort Donut");
+		btnSortDonut.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Donut> donuts = new ArrayList<Donut>();
+				for (int i = 0; i < dlm.size(); i++) {
+					donuts.add(dlm.getElementAt(i));
+				}
+				Collections.sort(donuts);
+				dlm.clear();
+				for (Donut donut : donuts) {
+					dlm.addElement(donut);
+				}
+			}
+		});
 		pnlSouth.add(btnSortDonut);
 		listDonut.setModel(dlm);
 	}

@@ -23,7 +23,7 @@ public class FrmStack extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private DefaultListModel<Donut> dlm = new DefaultListModel<Donut>();
-	JList listDonut = new JList();
+	JList<Donut> listDonut = new JList<>();
 
 	/**
 	 * Launch the application.

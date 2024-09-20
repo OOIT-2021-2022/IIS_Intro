@@ -255,6 +255,19 @@ public class Test {
 			System.out.println(rectangles[i]);
 		}
 	`	*/	
+		Donut d1 = new Donut(new Point(5,5), 10, 5);
+		Donut d2 = new Donut(new Point(5,5), 10, 2);
+		Donut d3 = new Donut(new Point(5,5), 10, 7);
+		
+		Donut[] donuts = {d1, d2, d3};
+		for (int i = 0; i < donuts.length; i++) {
+			System.out.println(donuts[i]);
+		}
+		Arrays.sort(donuts);
+		System.out.println("\n");
+		for (int i = 0; i < donuts.length; i++) {
+			System.out.println(donuts[i]);
+		}
 	}
 
 }
