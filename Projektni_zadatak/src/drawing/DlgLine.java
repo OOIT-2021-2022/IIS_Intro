@@ -152,4 +152,12 @@ public class DlgLine extends JDialog {
 		}
 	}
 
+	public Line getLine() {
+		return line;
+	}
+
+	public void setLine(Line line) {
+		this.line = line;
+	}
+
 }

@@ -162,4 +162,12 @@ public class DlgRectangle extends JDialog {
 		}
 	}
 
+	public Rectangle getRectangle() {
+		return rectangle;
+	}
+
+	public void setRectangle(Rectangle rectangle) {
+		this.rectangle = rectangle;
+	}
+
 }

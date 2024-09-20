@@ -157,4 +157,12 @@ public class DlgDonut extends JDialog {
 		}
 	}
 
+	public Donut getDonut() {
+		return donut;
+	}
+
+	public void setDonut(Donut donut) {
+		this.donut = donut;
+	}
+
 }
