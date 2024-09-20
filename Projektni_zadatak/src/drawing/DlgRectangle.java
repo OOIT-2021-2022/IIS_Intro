@@ -162,7 +162,7 @@ public class DlgRectangle extends JDialog {
 								int width = Integer.parseInt(txtWidth.getText());
 								int height = Integer.parseInt(txtHeight.getText());
 								if(x < 0 || y < 0 || width <= 0 || height <= 0) {
-									JOptionPane.showMessageDialog(null, "Coordinates cannot be less (or equal for Width and Height) than zero!", "Warning", 
+									JOptionPane.showMessageDialog(null, "Coordinates cannot be less than (or for Width and Height equal to) zero!", "Warning", 
 											JOptionPane.ERROR_MESSAGE);
 									
 								}

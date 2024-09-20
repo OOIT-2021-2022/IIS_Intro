@@ -3,7 +3,7 @@ package geometry;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Circle extends Shape{
+public class Circle extends SurfaceShape{
 	protected Point center;
 	private int radius;
 	
@@ -19,6 +19,27 @@ public class Circle extends Shape{
 	public Circle(Point center, int radius, boolean selected) {
 		this (center, radius);
 		setSelected(selected);
+	}
+	
+	public Circle(Point center, int radius, Color color) {
+		this(center, radius);
+		this.setColor(color);
+	}
+	
+	public Circle(Point center, int radius, boolean selected, Color color) {
+		this(center, radius, selected);
+		this.setColor(color);
+	}
+	
+	public Circle(Point center, int radius, Color color, Color innerColor) {
+		this(center, radius, color);
+		this.setInnerColor(innerColor);
+	}
+	
+	public Circle(Point center, int radius, boolean selected, Color color, Color innerColor) {
+		this(center, radius, selected);
+		this.setColor(innerColor);
+		this.setInnerColor(innerColor);
 	}
 	
 	public double circumference() {
@@ -107,6 +128,13 @@ public class Circle extends Shape{
 			return (int)(this.area() - circleToCompare.area());
 		}
 		return 0;
+	}
+
+	@Override
+	public void fill(Graphics g) {
+		// TODO Auto-generated method stub
+		g.setColor(getInnerColor());
+		g.fillOval(center.getX()-radius, center.getY()-radius, radius*2, radius*2);
 	}
 	
 }
