@@ -11,6 +11,7 @@ import geometry.Shape;
 public class PnlDrawing extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private ArrayList<Shape> shapes = new ArrayList<Shape>();
 
 	/**
 	 * Create the panel.
@@ -20,7 +21,6 @@ public class PnlDrawing extends JPanel {
 	}
 	
 	public void paint(Graphics g) {
-		ArrayList<Shape> shapes = new ArrayList<Shape>();
 		Iterator<Shape> it = shapes.iterator();
 		while(it.hasNext()) {
 			it.next().draw(g);
