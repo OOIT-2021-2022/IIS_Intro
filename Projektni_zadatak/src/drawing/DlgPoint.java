@@ -174,6 +174,14 @@ public class DlgPoint extends JDialog {
 		this.txtYCoordinate = txtYCoordinate;
 	}
 
+	public boolean isOk() {
+		return isOk;
+	}
+
+	public void setOk(boolean isOk) {
+		this.isOk = isOk;
+	}
+
 	public Color getColor() {
 		return color;
 	}

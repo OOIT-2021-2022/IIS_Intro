@@ -11,10 +11,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import geometry.Line;
+import geometry.Point;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -31,6 +33,7 @@ public class DlgLine extends JDialog {
 	private JTextField txtY2Coordinate;
 	private Color color;
 	private Line line;
+	private boolean isOk = false;
 
 	/**
 	 * Launch the application.
@@ -86,20 +89,18 @@ public class DlgLine extends JDialog {
 							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPanel.createSequentialGroup()
 									.addComponent(lblX1Coordinate)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addGap(18)
 									.addComponent(txtX1Coordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_contentPanel.createSequentialGroup()
-									.addComponent(lblY1Coordinate)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(txtY1Coordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPanel.createSequentialGroup()
-									.addComponent(lblX2Coordinate)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(txtX2Coordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPanel.createSequentialGroup()
-									.addComponent(lblY2Coordinate)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(txtY2Coordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+									.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblY1Coordinate)
+										.addComponent(lblX2Coordinate)
+										.addComponent(lblY2Coordinate))
+									.addGap(18)
+									.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+										.addComponent(txtY2Coordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtX2Coordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtY1Coordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addGap(196)
 							.addComponent(btnColor)))
@@ -137,6 +138,31 @@ public class DlgLine extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						try {
+							if(txtX1Coordinate.getText().trim().isEmpty() || txtY1Coordinate.getText().trim().isEmpty() || 
+									txtX2Coordinate.getText().trim().isEmpty() || txtY2Coordinate.getText().trim().isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Input cannot be empty for any elements!", "Warning", JOptionPane.ERROR_MESSAGE);
+							}
+							else {
+								int x1 = Integer.parseInt(txtX1Coordinate.getText());
+								int y1 = Integer.parseInt(txtY1Coordinate.getText());
+								int x2 = Integer.parseInt(txtX2Coordinate.getText());
+								int y2 = Integer.parseInt(txtY2Coordinate.getText());
+								if(x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0) {
+									JOptionPane.showMessageDialog(null, "Coordinates cannot be less than zero!", "Warning", JOptionPane.ERROR_MESSAGE);
+									
+								}
+								else {
+									isOk = true;
+									line = new Line(new Point(x1,y1), new Point(x2,y2), false, color);
+									setVisible(false);
+								}
+								
+							}
+							
+						} catch (NumberFormatException e1) {
+							JOptionPane.showMessageDialog(null, "Input has to be a number!", "Warning", JOptionPane.ERROR_MESSAGE);
+						}
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -162,6 +188,54 @@ public class DlgLine extends JDialog {
 
 	public void setLine(Line line) {
 		this.line = line;
+	}
+
+	public JTextField getTxtX1Coordinate() {
+		return txtX1Coordinate;
+	}
+
+	public void setTxtX1Coordinate(JTextField txtX1Coordinate) {
+		this.txtX1Coordinate = txtX1Coordinate;
+	}
+
+	public JTextField getTxtY1Coordinate() {
+		return txtY1Coordinate;
+	}
+
+	public void setTxtY1Coordinate(JTextField txtY1Coordinate) {
+		this.txtY1Coordinate = txtY1Coordinate;
+	}
+
+	public JTextField getTxtX2Coordinate() {
+		return txtX2Coordinate;
+	}
+
+	public void setTxtX2Coordinate(JTextField txtX2Coordinate) {
+		this.txtX2Coordinate = txtX2Coordinate;
+	}
+
+	public JTextField getTxtY2Coordinate() {
+		return txtY2Coordinate;
+	}
+
+	public void setTxtY2Coordinate(JTextField txtY2Coordinate) {
+		this.txtY2Coordinate = txtY2Coordinate;
+	}
+
+	public boolean isOk() {
+		return isOk;
+	}
+
+	public void setOk(boolean isOk) {
+		this.isOk = isOk;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
 	}
 
 }
