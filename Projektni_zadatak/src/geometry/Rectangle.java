@@ -3,7 +3,7 @@ package geometry;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Rectangle extends Shape {
+public class Rectangle extends SurfaceShape {
 	private Point upperLeftPoint;
 	private int width;
 	private int height;
@@ -21,6 +21,27 @@ public class Rectangle extends Shape {
 	public Rectangle(Point upperLeftPoint, int width, int height, boolean selected) {
 		this (upperLeftPoint, width, height);
 		setSelected(selected);
+	}
+	
+	public Rectangle(Point upperLeftPoint, int width, int height, Color color) {
+		this(upperLeftPoint, width, height);
+		this.setColor(color);
+	}
+	
+	public Rectangle(Point upperLeftPoint, int width, int height, boolean selected, Color color) {
+		this(upperLeftPoint, width, height, selected);
+		this.setColor(color);
+	}
+	
+	public Rectangle(Point upperLeftPoint, int width, int height, Color color, Color innerColor) {
+		this(upperLeftPoint, width, height, color);
+		this.setInnerColor(innerColor);
+	}
+	
+	public Rectangle(Point upperLeftPoint, int width, int height, boolean selected, Color color, Color innerColor) {
+		this(upperLeftPoint, width, height, selected);
+		this.setColor(color);
+		this.setInnerColor(innerColor);
 	}
 	
 	public double area() {
@@ -116,6 +137,13 @@ public class Rectangle extends Shape {
 			return (int)(this.area() - recToCompare.area());
 		}
 		return 0;
+	}
+
+	@Override
+	public void fill(Graphics g) {
+		// TODO Auto-generated method stub
+		g.setColor(getInnerColor());
+		g.fillRect(upperLeftPoint.getX(), upperLeftPoint.getY(), width, height);
 	}
 	
 }

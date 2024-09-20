@@ -165,7 +165,7 @@ public class DlgStack extends JDialog {
 										}
 									}
 									else {
-										JOptionPane.showMessageDialog(null, "Inputs for radius and inner radius have to be greater than 0!",
+										JOptionPane.showMessageDialog(null, "Inputs for Radius and Inner Radius have to be greater than zero!",
 												"Warning", JOptionPane.ERROR_MESSAGE);
 									}
 								}

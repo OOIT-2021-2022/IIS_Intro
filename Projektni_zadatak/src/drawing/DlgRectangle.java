@@ -10,11 +10,14 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import geometry.Line;
+import geometry.Point;
 import geometry.Rectangle;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -32,6 +35,7 @@ public class DlgRectangle extends JDialog {
 	private Color edgeColor;
 	private Color innerColor;
 	private Rectangle rectangle;
+	private boolean isOk = false;
 
 	/**
 	 * Launch the application.
@@ -145,6 +149,36 @@ public class DlgRectangle extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							if(txtXCoordinate.getText().trim().isEmpty() || txtYCoordinate.getText().trim().isEmpty() || 
+									txtWidth.getText().trim().isEmpty() || txtHeight.getText().trim().isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Input cannot be empty for any elements!", "Warning", JOptionPane.ERROR_MESSAGE);
+							}
+							else {
+								int x = Integer.parseInt(txtXCoordinate.getText());
+								int y = Integer.parseInt(txtYCoordinate.getText());
+								int width = Integer.parseInt(txtWidth.getText());
+								int height = Integer.parseInt(txtHeight.getText());
+								if(x < 0 || y < 0 || width <= 0 || height <= 0) {
+									JOptionPane.showMessageDialog(null, "Coordinates cannot be less (or equal for Width and Height) than zero!", "Warning", 
+											JOptionPane.ERROR_MESSAGE);
+									
+								}
+								else {
+									isOk = true;
+									rectangle = new Rectangle(new Point(x,y), width, height, false, edgeColor, innerColor);
+									setVisible(false);
+								}
+								
+							}
+							
+						} catch (NumberFormatException e1) {
+							JOptionPane.showMessageDialog(null, "Input has to be a number!", "Warning", JOptionPane.ERROR_MESSAGE);
+					}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -168,6 +202,62 @@ public class DlgRectangle extends JDialog {
 
 	public void setRectangle(Rectangle rectangle) {
 		this.rectangle = rectangle;
+	}
+
+	public JTextField getTxtXCoordinate() {
+		return txtXCoordinate;
+	}
+
+	public void setTxtXCoordinate(JTextField txtXCoordinate) {
+		this.txtXCoordinate = txtXCoordinate;
+	}
+
+	public JTextField getTxtYCoordinate() {
+		return txtYCoordinate;
+	}
+
+	public void setTxtYCoordinate(JTextField txtYCoordinate) {
+		this.txtYCoordinate = txtYCoordinate;
+	}
+
+	public JTextField getTxtWidth() {
+		return txtWidth;
+	}
+
+	public void setTxtWidth(JTextField txtWidth) {
+		this.txtWidth = txtWidth;
+	}
+
+	public JTextField getTxtHeight() {
+		return txtHeight;
+	}
+
+	public void setTxtHeight(JTextField txtHeight) {
+		this.txtHeight = txtHeight;
+	}
+
+	public Color getEdgeColor() {
+		return edgeColor;
+	}
+
+	public void setEdgeColor(Color edgeColor) {
+		this.edgeColor = edgeColor;
+	}
+
+	public Color getInnerColor() {
+		return innerColor;
+	}
+
+	public void setInnerColor(Color innerColor) {
+		this.innerColor = innerColor;
+	}
+
+	public boolean isOk() {
+		return isOk;
+	}
+
+	public void setOk(boolean isOk) {
+		this.isOk = isOk;
 	}
 
 }

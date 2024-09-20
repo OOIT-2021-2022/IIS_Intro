@@ -140,7 +140,7 @@ public class DlgSort extends JDialog {
 							int radius = Integer.parseInt(txtRadius.getText());
 							int innerRadius = Integer.parseInt(txtInnerRadius.getText());
 							if(txtXCoordinate.getText().trim().isEmpty() || txtYCoordinate.getText().trim().isEmpty() || 
-									txtRadius.getText().trim().isEmpty()) {
+									txtRadius.getText().trim().isEmpty() || txtInnerRadius.getText().trim().isEmpty()) {
 								JOptionPane.showMessageDialog(null, "Input cannot be empty!", "Warning", JOptionPane.ERROR_MESSAGE);
 							}
 								else {
@@ -157,7 +157,7 @@ public class DlgSort extends JDialog {
 										}
 									}
 									else {
-										JOptionPane.showMessageDialog(null, "Input has to be greater than or equal (for coordinates) to 0!",
+										JOptionPane.showMessageDialog(null, "Inputs for Radius and Inner Radius have to be greater then zero!",
 												"Warning", JOptionPane.ERROR_MESSAGE);
 									}
 								}
