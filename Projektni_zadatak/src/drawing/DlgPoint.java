@@ -1,12 +1,17 @@
 package drawing;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Point;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -22,6 +27,8 @@ public class DlgPoint extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtXCoordinate;
 	private JTextField txtYCoordinate;
+	private Color color;
+	private Point point;
 
 	/**
 	 * Launch the application.
@@ -54,6 +61,11 @@ public class DlgPoint extends JDialog {
 		txtYCoordinate.setHorizontalAlignment(SwingConstants.TRAILING);
 		txtYCoordinate.setColumns(10);
 		JButton btnColor = new JButton("Color");
+		btnColor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				color = JColorChooser.showDialog(null, "Choose a color for your Point", color);
+			}
+		});
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)

@@ -1,12 +1,17 @@
 package drawing;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Circle;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -23,6 +28,9 @@ public class DlgCircle extends JDialog {
 	private JTextField txtXCoordinate;
 	private JTextField txtYCoordinate;
 	private JTextField txtRadius;
+	private Color edgeColor;
+	private Color innerColor;
+	private Circle circle;
 
 	/**
 	 * Launch the application.
@@ -58,31 +66,43 @@ public class DlgCircle extends JDialog {
 		txtRadius = new JTextField();
 		txtRadius.setHorizontalAlignment(SwingConstants.TRAILING);
 		txtRadius.setColumns(10);
-		JButton btnColor = new JButton("Color");
+		JButton btnEdgeColor = new JButton("Edge Color");
+		btnEdgeColor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				edgeColor = JColorChooser.showDialog(null, "Choose an edge color for your Circle", edgeColor);
+				
+			}
+		});
+		
+		JButton btnInnerColor = new JButton("Inner Color");
+		btnInnerColor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				innerColor = JColorChooser.showDialog(null, "Chooser an inner color for your Circle", innerColor);
+			}
+		});
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPanel.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPanel.createSequentialGroup()
-									.addComponent(lblCenterXCoordinate)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(txtXCoordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPanel.createSequentialGroup()
-									.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblCenterYCoordinate)
-										.addComponent(lblRadius))
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
-										.addComponent(txtRadius, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(txtYCoordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
-						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGap(194)
-							.addComponent(btnColor)))
-					.addContainerGap(197, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl_contentPanel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_contentPanel.createSequentialGroup()
+								.addComponent(lblCenterXCoordinate)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(txtXCoordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_contentPanel.createSequentialGroup()
+								.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+									.addComponent(lblCenterYCoordinate)
+									.addComponent(lblRadius))
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+									.addComponent(txtRadius, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(txtYCoordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+						.addComponent(btnEdgeColor, Alignment.TRAILING))
+					.addGap(18)
+					.addComponent(btnInnerColor)
+					.addContainerGap(161, Short.MAX_VALUE))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -100,7 +120,9 @@ public class DlgCircle extends JDialog {
 						.addComponent(lblRadius)
 						.addComponent(txtRadius, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-					.addComponent(btnColor)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnEdgeColor)
+						.addComponent(btnInnerColor))
 					.addContainerGap())
 		);
 		contentPanel.setLayout(gl_contentPanel);

@@ -1,12 +1,17 @@
 package drawing;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Line;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -24,6 +29,8 @@ public class DlgLine extends JDialog {
 	private JTextField txtY1Coordinate;
 	private JTextField txtX2Coordinate;
 	private JTextField txtY2Coordinate;
+	private Color color;
+	private Line line;
 
 	/**
 	 * Launch the application.
@@ -52,6 +59,11 @@ public class DlgLine extends JDialog {
 		JLabel lblX2Coordinate = new JLabel("End Point X Coordinate:");
 		JLabel lblY2Coordinate = new JLabel("End Point Y Coordinate:");
 		JButton btnColor = new JButton("Color");
+		btnColor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				color = JColorChooser.showDialog(null, "Choose a color for your Line", color);
+			}
+		});
 		txtX1Coordinate = new JTextField();
 		txtX1Coordinate.setHorizontalAlignment(SwingConstants.TRAILING);
 		txtX1Coordinate.setColumns(10);

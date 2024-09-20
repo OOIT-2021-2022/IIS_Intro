@@ -1,12 +1,17 @@
 package drawing;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import geometry.Rectangle;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -24,6 +29,9 @@ public class DlgRectangle extends JDialog {
 	private JTextField txtYCoordinate;
 	private JTextField txtWidth;
 	private JTextField txtHeight;
+	private Color edgeColor;
+	private Color innerColor;
+	private Rectangle rectangle;
 
 	/**
 	 * Launch the application.
@@ -63,7 +71,19 @@ public class DlgRectangle extends JDialog {
 		txtHeight = new JTextField();
 		txtHeight.setHorizontalAlignment(SwingConstants.TRAILING);
 		txtHeight.setColumns(10);
-		JButton btnColor = new JButton("Color");
+		JButton btnEdgeColor = new JButton("Edge Color");
+		btnEdgeColor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				edgeColor = JColorChooser.showDialog(null, "Choose an edge color for your Rectangle", edgeColor);
+			}
+		});
+		
+		JButton btnAreaColor = new JButton("Inner Color");
+		btnAreaColor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				innerColor = JColorChooser.showDialog(null, "Choose an inner color for your Rectangle", innerColor);
+			}
+		});
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);
 		gl_contentPanel.setHorizontalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -87,9 +107,11 @@ public class DlgRectangle extends JDialog {
 										.addComponent(txtWidth, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 										.addComponent(txtYCoordinate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))))
 						.addGroup(gl_contentPanel.createSequentialGroup()
-							.addGap(216)
-							.addComponent(btnColor)))
-					.addContainerGap(220, Short.MAX_VALUE))
+							.addGap(146)
+							.addComponent(btnEdgeColor)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnAreaColor)))
+					.addContainerGap(155, Short.MAX_VALUE))
 		);
 		gl_contentPanel.setVerticalGroup(
 			gl_contentPanel.createParallelGroup(Alignment.LEADING)
@@ -111,7 +133,9 @@ public class DlgRectangle extends JDialog {
 						.addComponent(lblHeight)
 						.addComponent(txtHeight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-					.addComponent(btnColor)
+					.addGroup(gl_contentPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnEdgeColor)
+						.addComponent(btnAreaColor))
 					.addContainerGap())
 		);
 		contentPanel.setLayout(gl_contentPanel);
