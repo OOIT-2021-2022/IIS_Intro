@@ -152,9 +152,7 @@ public class DlgStack extends JDialog {
 								JOptionPane.showMessageDialog(null, "Input cannot be empty!", "Warning", JOptionPane.ERROR_MESSAGE);
 							}
 								else {
-									if (Integer.parseInt(txtXCoordinate.getText()) >= 0 && 
-											Integer.parseInt(txtYCoordinate.getText()) >= 0 &&
-											Integer.parseInt(txtRadius.getText()) > 0 &&
+									if (Integer.parseInt(txtRadius.getText()) > 0 &&
 											Integer.parseInt(txtInnerRadius.getText()) > 0) {
 										isOk = true;
 										donut = new Donut(new Point(x,y), radius, innerRadius);
