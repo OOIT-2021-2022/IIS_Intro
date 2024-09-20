@@ -143,15 +143,15 @@ public class DlgStack extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
-							int x = Integer.parseInt(txtXCoordinate.getText());
-							int y = Integer.parseInt(txtYCoordinate.getText());
-							int radius = Integer.parseInt(txtRadius.getText());
-							int innerRadius = Integer.parseInt(txtInnerRadius.getText());
 							if(txtXCoordinate.getText().trim().isEmpty() || txtYCoordinate.getText().trim().isEmpty() || 
-									txtRadius.getText().trim().isEmpty()) {
+									txtRadius.getText().trim().isEmpty() || txtInnerRadius.getText().trim().isEmpty()) {
 								JOptionPane.showMessageDialog(null, "Input cannot be empty!", "Warning", JOptionPane.ERROR_MESSAGE);
 							}
 								else {
+									int x = Integer.parseInt(txtXCoordinate.getText());
+									int y = Integer.parseInt(txtYCoordinate.getText());
+									int radius = Integer.parseInt(txtRadius.getText());
+									int innerRadius = Integer.parseInt(txtInnerRadius.getText());
 									if (Integer.parseInt(txtRadius.getText()) > 0 &&
 											Integer.parseInt(txtInnerRadius.getText()) > 0) {
 										if(Integer.parseInt(txtRadius.getText()) <= Integer.parseInt(txtInnerRadius.getText())){
@@ -165,7 +165,7 @@ public class DlgStack extends JDialog {
 										}
 									}
 									else {
-										JOptionPane.showMessageDialog(null, "Input has to be greater than or equal (for coordinates) to 0!",
+										JOptionPane.showMessageDialog(null, "Inputs for radius and inner radius have to be greater than 0!",
 												"Warning", JOptionPane.ERROR_MESSAGE);
 									}
 								}

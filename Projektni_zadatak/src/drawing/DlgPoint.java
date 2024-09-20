@@ -112,6 +112,10 @@ public class DlgPoint extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						try {
+						if(txtXCoordinate.getText().trim().isEmpty() || txtYCoordinate.getText().trim().isEmpty()) {
+							JOptionPane.showMessageDialog(null, "Input cannot be empty for any coordinates!", "Warning", JOptionPane.ERROR_MESSAGE);
+						}
+						else {
 							int x = Integer.parseInt(txtXCoordinate.getText());
 							int y = Integer.parseInt(txtYCoordinate.getText());
 							if(x < 0 || y < 0) {
@@ -123,6 +127,7 @@ public class DlgPoint extends JDialog {
 								point = new Point(x,y, false, color);
 								setVisible(false);
 							}
+						}
 						} catch(NumberFormatException e1) {
 							JOptionPane.showMessageDialog(null, "Input has to be a number!", "Warning", JOptionPane.ERROR_MESSAGE);
 						}
