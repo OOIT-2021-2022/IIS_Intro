@@ -20,6 +20,32 @@ public class Donut extends Circle{
 		this.innerRadius = innerRadius;
 	}
 	
+	public Donut(Point center, int radius, int innerRadius, Color color) {
+		super(center, radius);
+		this.innerRadius = innerRadius;
+		this.setColor(color);
+	}
+	
+	public Donut(Point center, int radius, int innerRadius, boolean selected, Color color) {
+		super (center, radius, selected);
+		this.innerRadius = innerRadius;
+		this.setColor(color);
+	}
+	
+	public Donut(Point center, int radius, int innerRadius, Color color, Color innerColor) {
+		super (center, radius);
+		this.innerRadius = innerRadius;
+		this.setColor(color);
+		this.setInnerColor(innerColor);
+	}
+	
+	public Donut(Point center, int radius, int innerRadius, boolean selected, Color color, Color innerColor) {
+		super (center, radius, selected);
+		this.innerRadius = innerRadius;
+		this.setColor(color);
+		this.setInnerColor(innerColor);
+	}
+	
 	public boolean equals(Object obj) {
 		if(obj instanceof Donut) {
 			Donut pomocna = (Donut) obj;
@@ -78,5 +104,14 @@ public class Donut extends Circle{
 			return Double.compare(donutToCompare.area(), this.area());
 		}	
 		return 0;
+	}
+
+	@Override
+	public void fill(Graphics g) {
+		// TODO Auto-generated method stub
+		this.setColor(getInnerColor());
+		super.fill(g);
+		this.setColor(Color.WHITE);
+		g.fillOval(this.getCenter().getX(), this.getCenter().getY(), innerRadius*2, innerRadius*2);
 	}
 }

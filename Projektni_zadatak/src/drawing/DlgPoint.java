@@ -124,7 +124,7 @@ public class DlgPoint extends JDialog {
 							}
 							else {
 								isOk = true;
-								point = new Point(x,y, false, color);
+								point = new Point(x, y, false, color);
 								setVisible(false);
 							}
 						}

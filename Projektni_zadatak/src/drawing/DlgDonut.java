@@ -10,11 +10,14 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+
 import geometry.Donut;
+import geometry.Point;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -32,6 +35,7 @@ public class DlgDonut extends JDialog {
 	private Color edgeColor;
 	private Color innerColor;
 	private Donut donut;
+	private boolean isOk = false;
 
 	/**
 	 * Launch the application.
@@ -140,6 +144,36 @@ public class DlgDonut extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							if(txtXCoordinate.getText().trim().isEmpty() || txtYCoordinate.getText().trim().isEmpty() || 
+									txtDonutRadius.getText().trim().isEmpty() || txtDonutInnerRadius.getText().trim().isEmpty()) {
+								JOptionPane.showMessageDialog(null, "Input cannot be empty for any elements!", "Warning", JOptionPane.ERROR_MESSAGE);
+							}
+							else {
+								int x = Integer.parseInt(txtXCoordinate.getText());
+								int y = Integer.parseInt(txtYCoordinate.getText());
+								int radius = Integer.parseInt(txtDonutRadius.getText());
+								int innerRadius = Integer.parseInt(txtDonutInnerRadius.getText());
+								if(x < 0 || y < 0 || radius <= 0 || innerRadius <= 0) {
+									JOptionPane.showMessageDialog(null, "Coordinates cannot be less than (or for Radius and Inner Radius equal to) zero!", "Warning", 
+											JOptionPane.ERROR_MESSAGE);
+									
+								}
+								else {
+									isOk = true;
+									donut = new Donut(new Point(x,y), radius, innerRadius, false, edgeColor, innerColor);
+									setVisible(false);
+								}
+								
+							}
+							
+						} catch (NumberFormatException e1) {
+							JOptionPane.showMessageDialog(null, "Input has to be a number!", "Warning", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -163,6 +197,62 @@ public class DlgDonut extends JDialog {
 
 	public void setDonut(Donut donut) {
 		this.donut = donut;
+	}
+
+	public JTextField getTxtXCoordinate() {
+		return txtXCoordinate;
+	}
+
+	public void setTxtXCoordinate(JTextField txtXCoordinate) {
+		this.txtXCoordinate = txtXCoordinate;
+	}
+
+	public JTextField getTxtYCoordinate() {
+		return txtYCoordinate;
+	}
+
+	public void setTxtYCoordinate(JTextField txtYCoordinate) {
+		this.txtYCoordinate = txtYCoordinate;
+	}
+
+	public JTextField getTxtDonutRadius() {
+		return txtDonutRadius;
+	}
+
+	public void setTxtDonutRadius(JTextField txtDonutRadius) {
+		this.txtDonutRadius = txtDonutRadius;
+	}
+
+	public JTextField getTxtDonutInnerRadius() {
+		return txtDonutInnerRadius;
+	}
+
+	public void setTxtDonutInnerRadius(JTextField txtDonutInnerRadius) {
+		this.txtDonutInnerRadius = txtDonutInnerRadius;
+	}
+
+	public Color getEdgeColor() {
+		return edgeColor;
+	}
+
+	public void setEdgeColor(Color edgeColor) {
+		this.edgeColor = edgeColor;
+	}
+
+	public Color getInnerColor() {
+		return innerColor;
+	}
+
+	public void setInnerColor(Color innerColor) {
+		this.innerColor = innerColor;
+	}
+
+	public boolean isOk() {
+		return isOk;
+	}
+
+	public void setOk(boolean isOk) {
+		this.isOk = isOk;
 	}
 
 }
