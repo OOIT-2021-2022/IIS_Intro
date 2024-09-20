@@ -15,6 +15,7 @@ import geometry.Point;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -29,6 +30,7 @@ public class DlgPoint extends JDialog {
 	private JTextField txtYCoordinate;
 	private Color color;
 	private Point point;
+	private boolean isOk = false;
 
 	/**
 	 * Launch the application.
@@ -73,15 +75,13 @@ public class DlgPoint extends JDialog {
 					.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addContainerGap()
+							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblXCoordinate)
+								.addComponent(lblYCoordinate))
+							.addGap(28)
 							.addGroup(gl_contentPanel.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(gl_contentPanel.createSequentialGroup()
-									.addComponent(lblYCoordinate)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(txtYCoordinate, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPanel.createSequentialGroup()
-									.addComponent(lblXCoordinate)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(txtXCoordinate))))
+								.addComponent(txtXCoordinate)
+								.addComponent(txtYCoordinate)))
 						.addGroup(gl_contentPanel.createSequentialGroup()
 							.addGap(182)
 							.addComponent(btnColor)))
@@ -109,6 +109,25 @@ public class DlgPoint extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						try {
+							int x = Integer.parseInt(txtXCoordinate.getText());
+							int y = Integer.parseInt(txtYCoordinate.getText());
+							if(x < 0 || y < 0) {
+								JOptionPane.showMessageDialog(null, "Coordinates have to be greater than zero!", "Warning", JOptionPane.ERROR_MESSAGE);
+								
+							}
+							else {
+								isOk = true;
+								point = new Point(x,y, false, color);
+								setVisible(false);
+							}
+						} catch(NumberFormatException e1) {
+							JOptionPane.showMessageDialog(null, "Input has to be a number!", "Warning", JOptionPane.ERROR_MESSAGE);
+						}
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -132,6 +151,30 @@ public class DlgPoint extends JDialog {
 
 	public void setPoint(Point point) {
 		this.point = point;
+	}
+
+	public JTextField getTxtXCoordinate() {
+		return txtXCoordinate;
+	}
+
+	public void setTxtXCoordinate(JTextField txtXCoordinate) {
+		this.txtXCoordinate = txtXCoordinate;
+	}
+
+	public JTextField getTxtYCoordinate() {
+		return txtYCoordinate;
+	}
+
+	public void setTxtYCoordinate(JTextField txtYCoordinate) {
+		this.txtYCoordinate = txtYCoordinate;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public void setColor(Color color) {
+		this.color = color;
 	}
 
 }
