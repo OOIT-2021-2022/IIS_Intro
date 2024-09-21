@@ -32,9 +32,9 @@ public class DlgDonut extends JDialog {
 	private JTextField txtYCoordinate;
 	private JTextField txtDonutRadius;
 	private JTextField txtDonutInnerRadius;
-	private Color edgeColor;
-	private Color innerColor;
-	private Donut donut;
+	private Color edgeColor = null;
+	private Color innerColor = null;
+	private Donut donut = null;
 	private boolean isOk = false;
 
 	/**
@@ -194,11 +194,28 @@ public class DlgDonut extends JDialog {
 	public Donut getDonut() {
 		return donut;
 	}
-
+	
 	public void setDonut(Donut donut) {
-		this.donut = donut;
+		txtXCoordinate.setText(String.valueOf(donut.getCenter().getX()));
+		txtYCoordinate.setText(String.valueOf(donut.getCenter().getY()));
+		txtDonutRadius.setText(String.valueOf(donut.getRadius()));
+		txtDonutInnerRadius.setText(String.valueOf(donut.getInnerRadius()));
+		edgeColor = donut.getColor();
+		innerColor = donut.getInnerColor();
 	}
-
+	
+	public void setPoint(Point point) {
+		txtXCoordinate.setText(String.valueOf(point.getX()));
+		txtYCoordinate.setText(String.valueOf(point.getY()));
+		
+	}
+	
+	public void setColors(Color edgeColor, Color innerColor) {
+		this.edgeColor = edgeColor;
+		this.innerColor = innerColor;
+	}
+	
+	
 	public JTextField getTxtXCoordinate() {
 		return txtXCoordinate;
 	}

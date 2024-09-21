@@ -44,7 +44,7 @@ public class Drawing extends JPanel {
 		Point p = new Point(50, 50, false, Color.MAGENTA);
 		Line l = new Line(new Point(15,15), new Point(25,25), false);
 		Circle c = new Circle(new Point(30,30), 15, false);
-		Donut d = new Donut(new Point(10,10), 10, 2, false);
+		Donut d = new Donut(new Point(100,100), 50, 20, false);
 		Rectangle r = new Rectangle(new Point(12,12), 40, 20, false);
 		ArrayList<Shape> shapes = new ArrayList<Shape>();
 		shapes.add(p);
@@ -75,5 +75,6 @@ public class Drawing extends JPanel {
 		}
 		*/
 		p.draw(g);
+		d.draw(g);
 	}
 }
