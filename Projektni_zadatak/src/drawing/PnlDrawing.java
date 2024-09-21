@@ -43,6 +43,32 @@ public class PnlDrawing extends JPanel {
 		}
 	}
 	
+	public int getSelected() {
+		for(int i = 0; i < shapes.size(); i++) {
+			if(shapes.get(i).isSelected()) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	public Shape getShape(int index) {
+		return shapes.get(index);
+	}
+	
+	public void setShape(int index, Shape shape) {
+		shapes.set(index, shape);
+	}
+	
+	public void removeSelected() {
+	    for (int i = shapes.size() - 1; i >= 0; i--) {
+	        if (shapes.get(i).isSelected()) {
+	            shapes.remove(i);
+	        }
+	    }
+	    repaint();
+	}
+	
 	
 	public void paint(Graphics g) {
 		super.paint(g);

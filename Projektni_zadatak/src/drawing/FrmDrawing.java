@@ -106,7 +106,7 @@ public class FrmDrawing extends JFrame {
 		contentPane.add(pnlDrawing, BorderLayout.CENTER);
 		
 		JPanel pnlWest = new JPanel();
-		pnlWest.setBackground(Color.LIGHT_GRAY);
+		pnlWest.setBackground(Color.BLACK);
 		pnlWest.repaint();
 		contentPane.add(pnlWest, BorderLayout.WEST);
 		pnlWest.setLayout(new GridLayout(0, 1));
@@ -143,12 +143,14 @@ public class FrmDrawing extends JFrame {
 				}
 			}
 		});
+		
 		pnlDrawSelect.add(tglbtnSelect);
 		
 		JPanel pnlModifyDelete = new JPanel();
 		FlowLayout flowLayout = (FlowLayout) pnlModifyDelete.getLayout();
 		pnlWest.add(pnlModifyDelete);
 		pnlModifyDelete.setPreferredSize(new Dimension(10,10));
+		btnModify.addActionListener(btnModifyListener());
 		
 		pnlModifyDelete.add(btnModify);
 		
@@ -224,6 +226,11 @@ public class FrmDrawing extends JFrame {
 					.addGap(183))
 		);
 		pnlShapes.setLayout(gl_pnlShapes);
+		
+		pnlShapes.setBackground(Color.GRAY);
+		pnlDrawSelect.setBackground(Color.GRAY);
+		pnlModifyDelete.setBackground(Color.GRAY);
+		
 	}
 	
 	private MouseAdapter pnlDrawClickListener() {
@@ -310,6 +317,29 @@ public class FrmDrawing extends JFrame {
 		};
 		};
 	}
+	
+	private ActionListener btnModifyListener() {
+		return new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int index = pnlDrawing.getSelected();
+				if (index == -1) 
+					return;
+				
+				Shape shape = pnlDrawing.getShape(index);
+				
+				if (shape instanceof Point) {
+					DlgPoint dlgPoint = new DlgPoint();
+					dlgPoint.setPoint((Point)shape);
+					dlgPoint.setVisible(true);
+					
+					if(dlgPoint.isOk()) {
+						pnlDrawing.setShape(index, dlgPoint.getPoint());
+						pnlDrawing.repaint();
+					}
+			}
+		}
+	};
+	};
 	
 	private void disableDrawButtons() {
 		tglbtnPoint.setEnabled(false);
