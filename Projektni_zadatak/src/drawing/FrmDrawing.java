@@ -443,5 +443,5 @@ public class FrmDrawing extends JFrame {
 		btnModify.setEnabled(false);
 		btnDelete.setEnabled(false);
 	}
-	
+	//poslednji commit
 }
