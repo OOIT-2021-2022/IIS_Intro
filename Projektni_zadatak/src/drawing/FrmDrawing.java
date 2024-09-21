@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import geometry.Line;
 import geometry.Point;
 
 import java.awt.BorderLayout;
@@ -38,7 +39,9 @@ public class FrmDrawing extends JFrame {
 	private Color edgeColor = Color.BLACK;
 	private Color innerColor = Color.WHITE;
 	private PnlDrawing pnlDrawing;
-	private Point startPoint;
+	private Point startPoint = null;
+	private Point endPoint = null; //for line
+	private boolean isLineDrawing = false;
 	private final ButtonGroup btnGroupDrawSelect = new ButtonGroup();
 	private final ButtonGroup btnGroupShapes = new ButtonGroup();
 	private static final int SHAPE_NONE = 0;
@@ -189,9 +192,33 @@ public class FrmDrawing extends JFrame {
 							pnlDrawing.addShape(point);
 							pnlDrawing.repaint();
 						}
+						resetDrawingState();
+						break;
+					
+				case SHAPE_LINE:
+					
+					if(isLineDrawing) {
+						DlgLine dlgLine = new DlgLine();
+						Line line = new Line(startPoint, clickedPoint);
+						dlgLine.setLine(line);
+						dlgLine.setColor(edgeColor);
+						dlgLine.setVisible(true);
+						if(dlgLine.getLine()!= null) pnlDrawing.addShape(dlgLine.getLine());
+						isLineDrawing = false;
+						return;
 					}
+					}
+				resetDrawingState();
 				}
 			
 		};
+		
+	}
+	
+	public void resetDrawingState() {
+		currentShapeMode = SHAPE_NONE;
+		startPoint = null;
+		endPoint = null;
+		isLineDrawing = false;
 	}
 }

@@ -187,7 +187,11 @@ public class DlgLine extends JDialog {
 	}
 
 	public void setLine(Line line) {
-		this.line = line;
+		txtX1Coordinate.setText(String.valueOf(line.getStartPoint().getX()));
+		txtY1Coordinate.setText(String.valueOf(line.getStartPoint().getY()));
+		txtX2Coordinate.setText(String.valueOf(line.getEndPoint().getX()));
+		txtY2Coordinate.setText(String.valueOf(line.getEndPoint().getY()));
+		color = line.getColor();
 	}
 
 	public JTextField getTxtX1Coordinate() {
