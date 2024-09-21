@@ -183,6 +183,7 @@ public class FrmDrawing extends JFrame {
 						DlgPoint dlgPoint = new DlgPoint();
 						dlgPoint.setPoint(clickedPoint);
 						dlgPoint.setVisible(true);
+						dlgPoint.setColor(edgeColor);
 						if(dlgPoint.isOk()) {
 							Point point = dlgPoint.getPoint();
 							pnlDrawing.addShape(point);

@@ -28,8 +28,8 @@ public class DlgPoint extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtXCoordinate;
 	private JTextField txtYCoordinate;
-	private Color color;
-	private Point point;
+	private Color color = Color.BLACK;
+	private Point point = null;
 	private boolean isOk = false;
 
 	/**
@@ -65,7 +65,10 @@ public class DlgPoint extends JDialog {
 		JButton btnColor = new JButton("Color");
 		btnColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				color = JColorChooser.showDialog(null, "Choose a color for your Point", color);
+				Color selectedColor = JColorChooser.showDialog(null, "Choose a color for your Point", color);
+				if(selectedColor != null){
+					color = selectedColor;
+				}
 			}
 		});
 		GroupLayout gl_contentPanel = new GroupLayout(contentPanel);

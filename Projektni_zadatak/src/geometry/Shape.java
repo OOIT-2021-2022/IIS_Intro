@@ -16,17 +16,13 @@ public abstract class Shape implements Moveable, Comparable{
 	}
 	
 	public Shape(boolean selected, Color color) {
-		this.color = color;
 		this.selected = selected;
+		this.color = color;
 	}
 	
 	public Shape(boolean selected) {
 		this.selected = selected;
 	}
-	
-	
-	public abstract boolean contains(int x, int y);
-	public abstract void draw(Graphics g);
 	
 	public boolean isSelected() {
 		return selected;
@@ -43,4 +39,8 @@ public abstract class Shape implements Moveable, Comparable{
 	public void setColor(Color color) {
 		this.color = color;
 	}
+	
+	public abstract boolean contains(int x, int y);
+	public abstract void draw(Graphics g);
+	
 }
