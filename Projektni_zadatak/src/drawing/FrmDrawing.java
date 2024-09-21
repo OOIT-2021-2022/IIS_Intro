@@ -3,6 +3,7 @@ package drawing;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -153,6 +154,7 @@ public class FrmDrawing extends JFrame {
 		btnModify.addActionListener(btnModifyListener());
 		
 		pnlModifyDelete.add(btnModify);
+		btnDelete.addActionListener(btnDeleteListener());
 		
 		pnlModifyDelete.add(btnDelete);
 		
@@ -337,7 +339,7 @@ public class FrmDrawing extends JFrame {
 						
 					}
 			}
-				if (shape instanceof Line) {
+				else if (shape instanceof Line) {
 					DlgLine dlgLine = new DlgLine();
 					dlgLine.setLine((Line)shape);
 					dlgLine.setVisible(true);
@@ -347,7 +349,7 @@ public class FrmDrawing extends JFrame {
 					}
 				}
 				
-				if (shape instanceof Rectangle) {
+				else if (shape instanceof Rectangle) {
 					DlgRectangle dlgRectangle = new DlgRectangle();
 					dlgRectangle.setRectangle((Rectangle)shape);
 					dlgRectangle.setVisible(true);
@@ -357,18 +359,45 @@ public class FrmDrawing extends JFrame {
 					}
 				}
 				
-				if (shape instanceof Circle) {
+				else if (shape instanceof Circle) {
 					DlgCircle dlgCircle = new DlgCircle();
 					dlgCircle.setCircle((Circle)shape);
 					dlgCircle.setVisible(true);
 					if(dlgCircle.isOk()) {
 						pnlDrawing.setShape(index, dlgCircle.getCircle());
-						
+						repaint();
+					}
+				}
+				
+				else if (shape instanceof Donut) {
+					DlgDonut dlgDonut = new DlgDonut();
+					dlgDonut.setDonut((Donut)shape);
+					dlgDonut.setVisible(true);
+					if(dlgDonut.isOk()) {
+						pnlDrawing.setShape(index, dlgDonut.getDonut());
+						repaint();
 					}
 				}
 		}
 	};
 	};
+	
+	private ActionListener btnDeleteListener() {
+		return new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(pnlDrawing.isEmpty()) {
+					return;
+				}
+				int confirmation = JOptionPane.showConfirmDialog(null, 
+						"Are you sure you want to delete the selected shape?", 
+						"Delete", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				if(confirmation == JOptionPane.YES_OPTION) {
+					pnlDrawing.removeSelected();
+				}
+			
+			}
+		};
+	}
 	
 	private void disableDrawButtons() {
 		tglbtnPoint.setEnabled(false);

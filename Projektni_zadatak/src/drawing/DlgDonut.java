@@ -168,7 +168,6 @@ public class DlgDonut extends JDialog {
 									donut = new Donut(new Point(x,y), radius, innerRadius, false, edgeColor, innerColor);
 									setVisible(false);
 								}
-								
 							}
 							
 						} catch (NumberFormatException e1) {

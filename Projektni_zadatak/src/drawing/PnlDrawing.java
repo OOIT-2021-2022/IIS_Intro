@@ -20,12 +20,12 @@ public class PnlDrawing extends JPanel {
 	 * Create the panel.
 	 */
 	public PnlDrawing() {
-		
+		setBackground(Color.WHITE);
 	}
 	
 	public void addShape(Shape shape) {
 		shapes.add(shape);
-		repaint();
+		
 	}
 	
 	public void deselect() {
@@ -78,6 +78,10 @@ public class PnlDrawing extends JPanel {
 			it.next().draw(g);
 		}
 		
+	}
+	
+	public boolean isEmpty() {
+		return shapes.isEmpty();
 	}
 
 	public ArrayList<Shape> getShapes() {
