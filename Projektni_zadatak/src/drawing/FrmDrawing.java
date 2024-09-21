@@ -265,12 +265,13 @@ public class FrmDrawing extends JFrame {
 					} 	
 						else {
 							DlgLine dlgLine = new DlgLine();
-							Line line = new Line(startPoint, clickedPoint);
-							dlgLine.setLine(line);
+							dlgLine.setStartPoint(startPoint);
+							dlgLine.setEndPoint(clickedPoint);
 							dlgLine.setVisible(true);
 							dlgLine.setColor(edgeColor);
 							if(dlgLine.isOk()) {
-								pnlDrawing.addShape(dlgLine.getLine());
+								Line line = dlgLine.getLine();
+								pnlDrawing.addShape(line);
 							}
 							isLineDrawing = false;
 							startPoint = null;
