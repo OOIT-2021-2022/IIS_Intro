@@ -58,13 +58,11 @@ public class Donut extends Circle{
 			return false;
 	}
 	
+	@Override
 	public boolean contains(int x, int y) {
 		return super.contains(x, y) && this.center.distance(x, y) >= this.innerRadius;
 	}
 	
-	public boolean contains(Point clickPoint) {
-		return super.contains(clickPoint) && clickPoint.distance(this.getCenter().getX(), this.getCenter().getY()) >= this.innerRadius;
-	}
 	
 	public double area() {
 		return super.area() - this.innerRadius * this.innerRadius * Math.PI;
@@ -73,8 +71,11 @@ public class Donut extends Circle{
 	@Override
 	public void draw(Graphics g) {
 		super.draw(g);
+		
 		g.setColor(getColor());
+		
 		g.drawOval(getCenter().getX() - this.innerRadius, getCenter().getY() - this.innerRadius, this.innerRadius*2, this.innerRadius*2);
+		
 		this.fill(g);
 		
 		if(isSelected()) {

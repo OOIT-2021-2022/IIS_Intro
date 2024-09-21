@@ -56,6 +56,7 @@ public class DlgDonut extends JDialog {
 	public DlgDonut() {
 		setBounds(100, 100, 450, 300);
 		setModal(true);
+		setTitle("Donut");
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -197,6 +198,7 @@ public class DlgDonut extends JDialog {
 	}
 	
 	public void setDonut(Donut donut) {
+		this.donut = donut;
 		txtXCoordinate.setText(String.valueOf(donut.getCenter().getX()));
 		txtYCoordinate.setText(String.valueOf(donut.getCenter().getY()));
 		txtDonutRadius.setText(String.valueOf(donut.getRadius()));

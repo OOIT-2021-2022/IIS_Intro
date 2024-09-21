@@ -15,6 +15,7 @@ public class PnlDrawing extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Shape> shapes = new ArrayList<Shape>();
 	private int i;
+	private Shape selectedShape = null;
 
 	/**
 	 * Create the panel.
@@ -29,18 +30,33 @@ public class PnlDrawing extends JPanel {
 	}
 	
 	public void deselect() {
-		shapes.forEach(shape -> shape.setSelected(false));
-		repaint();
+	    shapes.forEach(shape -> shape.setSelected(false));
+	    repaint();
 	}
 	
 	public void select(Point point) {
-		for (i = shapes.size()-1; i >= 0; i--) {
-			if (shapes.get(i).contains(point.getX(), point.getY())) {
-				shapes.get(i).setSelected(true);
-				repaint();
-				return;
-			}
-		}
+	    for (int i = shapes.size() - 1; i >= 0; i--) {
+	        Shape shape = shapes.get(i);
+	        if (shape.contains(point.getX(), point.getY())) {
+	            if (shape == selectedShape) {
+	                shape.setSelected(false);
+	                selectedShape = null; 
+	            } else {
+	                if (selectedShape != null) {
+	                    selectedShape.setSelected(false);
+	                }
+	                shape.setSelected(true);
+	                selectedShape = shape;
+	            }
+	            repaint();
+	            return;
+	        }
+	    }
+	    if (selectedShape != null) {
+	        selectedShape.setSelected(false);
+	        selectedShape = null;
+	        repaint();
+	    }
 	}
 	
 	public int getSelected() {

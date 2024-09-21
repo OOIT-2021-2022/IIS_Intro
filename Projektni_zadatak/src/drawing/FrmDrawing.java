@@ -54,7 +54,6 @@ public class FrmDrawing extends JFrame {
 	private static final int SHAPE_RECTANGLE = 3;
 	private static final int SHAPE_CIRCLE = 4;
 	private static final int SHAPE_DONUT = 5;
-	private Shape selectedShape = null;
 	private static final int MODE_DRAW = 1;
 	private static final int MODE_SELECT = 2;
 	
@@ -329,6 +328,7 @@ public class FrmDrawing extends JFrame {
 					return;
 				
 				Shape shape = pnlDrawing.getShape(index);
+				System.out.println("Modifying shape: " + shape.getClass().getSimpleName());
 				
 				if (shape instanceof Point) {
 					DlgPoint dlgPoint = new DlgPoint();
@@ -369,7 +369,6 @@ public class FrmDrawing extends JFrame {
 					}
 				}
 				
-				// Modify Donut
 				else if (shape instanceof Donut) {
 					DlgDonut dlgDonut = new DlgDonut();
 					dlgDonut.setDonut((Donut)shape);
@@ -378,7 +377,6 @@ public class FrmDrawing extends JFrame {
 						pnlDrawing.setShape(index, dlgDonut.getDonut());
 					}
 				}
-				// Modify Donut
 		}
 	};
 	};

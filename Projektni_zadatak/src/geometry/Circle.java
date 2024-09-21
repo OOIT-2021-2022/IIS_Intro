@@ -103,14 +103,11 @@ public class Circle extends SurfaceShape{
 			return false;
 	}
 	
+	@Override
 	public boolean contains(int x, int y) {
 		return center.distance(x, y) <= radius;
 	}
 	
-	public boolean contains(Point clickPoint) {
-		return center.distance(clickPoint.getX(), clickPoint.getY()) <= radius;
-	}
-
 	@Override
 	public void moveTo(int x, int y) {
 		center.moveTo(x, y);
