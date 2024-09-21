@@ -38,7 +38,7 @@ public class Circle extends SurfaceShape{
 	
 	public Circle(Point center, int radius, boolean selected, Color color, Color innerColor) {
 		this(center, radius, selected);
-		this.setColor(innerColor);
+		this.setColor(color);
 		this.setInnerColor(innerColor);
 	}
 	
@@ -52,8 +52,9 @@ public class Circle extends SurfaceShape{
 	
 	@Override
 	public void draw(Graphics g) {
+		g.setColor(getColor());
 		g.drawOval(center.getX()-radius, center.getY()-radius, radius*2, radius*2);
-		
+		this.fill(g);
 		if (isSelected()) {
 			g.setColor(Color.BLUE);
 			g.drawRect(center.getX()-2, center.getY()-2, 4, 4);
@@ -134,7 +135,7 @@ public class Circle extends SurfaceShape{
 	public void fill(Graphics g) {
 		// TODO Auto-generated method stub
 		g.setColor(getInnerColor());
-		g.fillOval(center.getX()-radius, center.getY()-radius, radius*2, radius*2);
+		g.fillOval(center.getX()-radius + 1, center.getY()-radius + 1, radius*2 - 2, radius*2 - 2);
 	}
 	
 }

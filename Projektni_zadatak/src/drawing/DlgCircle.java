@@ -30,9 +30,9 @@ public class DlgCircle extends JDialog {
 	private JTextField txtXCoordinate;
 	private JTextField txtYCoordinate;
 	private JTextField txtRadius;
-	private Color edgeColor;
-	private Color innerColor;
-	private Circle circle;
+	private Color edgeColor = null;
+	private Color innerColor = null;
+	private Circle circle = null;
 	private boolean isOk = false;
 
 	/**
@@ -186,7 +186,21 @@ public class DlgCircle extends JDialog {
 	}
 
 	public void setCircle(Circle circle) {
-		this.circle = circle;
+		txtXCoordinate.setText(String.valueOf(circle.getCenter().getX()));
+		txtYCoordinate.setText(String.valueOf(circle.getCenter().getY()));
+		txtRadius.setText(String.valueOf(circle.getRadius()));
+		edgeColor = circle.getColor();
+		innerColor = circle.getInnerColor();
+	}
+	
+	public void setPoint(Point point) {
+		txtXCoordinate.setText(String.valueOf(point.getX()));
+		txtYCoordinate.setText(String.valueOf(point.getY()));
+	}
+	
+	public void setColors(Color edgeColor, Color innerColor) {
+		this.edgeColor = edgeColor;
+		this.innerColor = innerColor;
 	}
 
 	public JTextField getTxtXCoordinate() {

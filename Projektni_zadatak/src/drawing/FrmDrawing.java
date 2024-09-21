@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import geometry.Circle;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
@@ -143,6 +144,11 @@ public class FrmDrawing extends JFrame {
 		});
 		
 		JToggleButton tglbtnCircle = new JToggleButton("Circle");
+		tglbtnCircle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentShapeMode = SHAPE_CIRCLE;
+			}
+		});
 		
 		JToggleButton tglbtnDonut = new JToggleButton("Donut");
 		
@@ -223,8 +229,18 @@ public class FrmDrawing extends JFrame {
 						pnlDrawing.repaint();
 					}
 					break;
-				}
-			
+				case SHAPE_CIRCLE:
+					DlgCircle dlgCircle = new DlgCircle();
+					dlgCircle.setPoint(clickedPoint);
+					dlgCircle.setVisible(true);
+					dlgCircle.setColors(edgeColor, innerColor);
+					if(dlgCircle.isOk()) {
+						Circle circle = dlgCircle.getCircle();
+						pnlDrawing.addShape(circle);
+						pnlDrawing.repaint();
+					}
+				
+				}	
 		}};
 		
 	}
