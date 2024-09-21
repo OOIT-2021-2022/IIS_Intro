@@ -53,7 +53,8 @@ public class PnlDrawing extends JPanel {
 	}
 	
 	public Shape getShape(int index) {
-		return shapes.get(index);
+		Shape shape = shapes.get(index);
+		return shape;
 	}
 	
 	public void setShape(int index, Shape shape) {

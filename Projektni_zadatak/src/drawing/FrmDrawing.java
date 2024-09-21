@@ -369,6 +369,7 @@ public class FrmDrawing extends JFrame {
 					}
 				}
 				
+				// Modify Donut
 				else if (shape instanceof Donut) {
 					DlgDonut dlgDonut = new DlgDonut();
 					dlgDonut.setDonut((Donut)shape);
@@ -377,6 +378,7 @@ public class FrmDrawing extends JFrame {
 						pnlDrawing.setShape(index, dlgDonut.getDonut());
 					}
 				}
+				// Modify Donut
 		}
 	};
 	};
