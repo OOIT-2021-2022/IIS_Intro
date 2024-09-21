@@ -34,7 +34,7 @@ public class DlgDonut extends JDialog {
 	private JTextField txtDonutInnerRadius;
 	private Color edgeColor = Color.BLACK;
 	private Color innerColor = Color.WHITE;
-	private Donut donut = null;
+	private Donut donut;
 	private boolean isOk = false;
 
 	/**
@@ -86,6 +86,7 @@ public class DlgDonut extends JDialog {
 		JButton btnInnerColor = new JButton("Inner Color");
 		btnInnerColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				innerColor = JColorChooser.showDialog(null, "Choose an inner color for your Donut", innerColor);
 			}
 		});
@@ -159,8 +160,9 @@ public class DlgDonut extends JDialog {
 								int y = Integer.parseInt(txtYCoordinate.getText());
 								int radius = Integer.parseInt(txtDonutRadius.getText());
 								int innerRadius = Integer.parseInt(txtDonutInnerRadius.getText());
-								if(x < 0 || y < 0 || radius <= 0 || innerRadius <= 0) {
-									JOptionPane.showMessageDialog(null, "Coordinates cannot be less than (or for Radius and Inner Radius equal to) zero!", "Warning", 
+								if(x < 0 || y < 0 || radius <= 0 || innerRadius <= 0 || radius <= innerRadius) {
+									JOptionPane.showMessageDialog(null, "Coordinates cannot be less than (or for Radius and Inner Radius equal to) zero!\n"
+											+ "Radius cannot be smaller or equal to innerRadius", "Warning", 
 											JOptionPane.ERROR_MESSAGE);
 									
 								}
@@ -184,6 +186,7 @@ public class DlgDonut extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						isOk = false;
 						setVisible(false);
 					}
 				});
@@ -198,7 +201,6 @@ public class DlgDonut extends JDialog {
 	}
 	
 	public void setDonut(Donut donut) {
-		this.donut = donut;
 		txtXCoordinate.setText(String.valueOf(donut.getCenter().getX()));
 		txtYCoordinate.setText(String.valueOf(donut.getCenter().getY()));
 		txtDonutRadius.setText(String.valueOf(donut.getRadius()));

@@ -150,9 +150,9 @@ public class FrmDrawing extends JFrame {
 		FlowLayout flowLayout = (FlowLayout) pnlModifyDelete.getLayout();
 		pnlWest.add(pnlModifyDelete);
 		pnlModifyDelete.setPreferredSize(new Dimension(10,10));
-		btnModify.addActionListener(btnModifyListener());
 		
 		pnlModifyDelete.add(btnModify);
+		btnModify.addActionListener(btnModifyListener());
 		btnDelete.addActionListener(btnDeleteListener());
 		
 		pnlModifyDelete.add(btnDelete);
@@ -328,9 +328,7 @@ public class FrmDrawing extends JFrame {
 					JOptionPane.showMessageDialog(null, "Please select a shape to modify.", "No Shape Detected", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
-				Shape shape = pnlDrawing.getShape(index);
-				System.out.println("Modifying shape: " + shape.getClass().getSimpleName());
-				
+				Shape shape = pnlDrawing.getShape(index);		
 				if (shape instanceof Point) {
 					DlgPoint dlgPoint = new DlgPoint();
 					dlgPoint.setPoint((Point)shape);
@@ -364,17 +362,6 @@ public class FrmDrawing extends JFrame {
 					}
 				}
 				
-				else if (shape instanceof Circle) {
-					DlgCircle dlgCircle = new DlgCircle();
-					dlgCircle.setCircle((Circle)shape);
-					dlgCircle.setVisible(true);
-					if(dlgCircle.isOk()) {
-						pnlDrawing.setShape(index, dlgCircle.getCircle());
-					} else {
-						pnlDrawing.deselect();
-					}
-				}
-				
 				else if (shape instanceof Donut) {
 					DlgDonut dlgDonut = new DlgDonut();
 					dlgDonut.setDonut((Donut)shape);
@@ -385,6 +372,19 @@ public class FrmDrawing extends JFrame {
 						pnlDrawing.deselect();
 					}
 				}
+				
+				else if (shape instanceof Circle) {
+					DlgCircle dlgCircle = new DlgCircle();
+					dlgCircle.setCircle((Circle)shape);
+					dlgCircle.setVisible(true);
+					if(dlgCircle.isOk()){
+						pnlDrawing.setShape(index, dlgCircle.getCircle());
+					} else {
+						pnlDrawing.deselect();
+					}
+				}
+				
+
 		}
 	};
 	};

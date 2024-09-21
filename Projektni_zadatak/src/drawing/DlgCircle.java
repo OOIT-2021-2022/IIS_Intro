@@ -173,6 +173,7 @@ public class DlgCircle extends JDialog {
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						isOk = false;
 						setVisible(false);
 					}
 				});
