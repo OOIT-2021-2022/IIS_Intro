@@ -39,6 +39,7 @@ public class Line extends Shape{
 	
 	@Override
 	public void draw(Graphics g) {
+		g.setColor(getColor());
 		g.drawLine(startPoint.getX(), startPoint.getY(), endPoint.getX(), endPoint.getY());
 		
 		if(isSelected()) {

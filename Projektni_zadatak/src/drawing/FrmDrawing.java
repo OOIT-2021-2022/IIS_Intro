@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import geometry.Line;
 import geometry.Point;
+import geometry.Rectangle;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -128,8 +129,18 @@ public class FrmDrawing extends JFrame {
 		});
 		
 		JToggleButton tglbtnLine = new JToggleButton("Line");
+		tglbtnLine.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentShapeMode = SHAPE_LINE;
+			}
+		});
 		
 		JToggleButton tglbtnRectangle = new JToggleButton("Rectangle");
+		tglbtnRectangle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentShapeMode = SHAPE_RECTANGLE;
+			}
+		});
 		
 		JToggleButton tglbtnCircle = new JToggleButton("Circle");
 		
@@ -192,26 +203,29 @@ public class FrmDrawing extends JFrame {
 							pnlDrawing.addShape(point);
 							pnlDrawing.repaint();
 						}
-						resetDrawingState();
 						break;
-					
+		
 				case SHAPE_LINE:
-					
-					if(isLineDrawing) {
-						DlgLine dlgLine = new DlgLine();
-						Line line = new Line(startPoint, clickedPoint);
-						dlgLine.setLine(line);
-						dlgLine.setColor(edgeColor);
-						dlgLine.setVisible(true);
-						if(dlgLine.getLine()!= null) pnlDrawing.addShape(dlgLine.getLine());
-						isLineDrawing = false;
-						return;
+						if(isLineDrawing) {
+							DlgLine dlgLine = new DlgLine();
+							
 					}
+						break;
+				
+				case SHAPE_RECTANGLE:
+					DlgRectangle dlgRectangle = new DlgRectangle();
+					dlgRectangle.setPoint(clickedPoint);
+					dlgRectangle.setVisible(true);
+					dlgRectangle.setColors(edgeColor, innerColor);
+					if(dlgRectangle.isOk()) {
+						Rectangle rectangle = dlgRectangle.getRectangle();
+						pnlDrawing.addShape(rectangle);
+						pnlDrawing.repaint();
 					}
-				resetDrawingState();
+					break;
 				}
 			
-		};
+		}};
 		
 	}
 	

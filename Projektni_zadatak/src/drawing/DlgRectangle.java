@@ -194,13 +194,23 @@ public class DlgRectangle extends JDialog {
 			}
 		}
 	}
+	
+	public void setPoint(Point point) {
+		txtXCoordinate.setText(String.valueOf(point.getX()));
+		txtYCoordinate.setText(String.valueOf(point.getY()));
+	}
 
 	public Rectangle getRectangle() {
 		return rectangle;
 	}
 
 	public void setRectangle(Rectangle rectangle) {
-		this.rectangle = rectangle;
+		txtXCoordinate.setText(String.valueOf(rectangle.getUpperLeftPoint().getX()));
+		txtYCoordinate.setText(String.valueOf(rectangle.getUpperLeftPoint().getY()));
+		txtWidth.setText(String.valueOf(rectangle.getWidth()));
+		txtHeight.setText(String.valueOf(rectangle.getHeight()));
+		edgeColor = rectangle.getColor();
+		innerColor = rectangle.getInnerColor();
 	}
 
 	public JTextField getTxtXCoordinate() {
@@ -257,6 +267,11 @@ public class DlgRectangle extends JDialog {
 
 	public void setOk(boolean isOk) {
 		this.isOk = isOk;
+	}
+	
+	public void setColors(Color edgeColor, Color innerColor) {
+		this.edgeColor = edgeColor;
+		this.innerColor = innerColor;
 	}
 
 }
