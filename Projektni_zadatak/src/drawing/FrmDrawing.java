@@ -13,6 +13,8 @@ import java.awt.Dimension;
 
 import javax.swing.JToggleButton;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import javax.swing.GroupLayout;
@@ -26,6 +28,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmDrawing extends JFrame {
 
@@ -35,7 +39,16 @@ public class FrmDrawing extends JFrame {
 	private Color innerColor = Color.WHITE;
 	private PnlDrawing pnlDrawing;
 	private Point startPoint;
-
+	private final ButtonGroup btnGroupDrawSelect = new ButtonGroup();
+	private final ButtonGroup btnGroupShapes = new ButtonGroup();
+	private static final int SHAPE_NONE = 0;
+	private static final int SHAPE_POINT = 1;
+	private static final int SHAPE_LINE = 2;
+	private static final int SHAPE_RECTANGLE = 3;
+	private static final int SHAPE_CIRCLE = 4;
+	private static final int SHAPE_DONUT = 5;
+	
+	private int currentShapeMode = SHAPE_NONE;
 	/**
 	 * Launch the application.
 	 */
@@ -80,6 +93,11 @@ public class FrmDrawing extends JFrame {
 		pnlWest.add(pnlDrawSelect);
 		
 		JToggleButton tglbtnDraw = new JToggleButton("Draw");
+		tglbtnDraw.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		pnlDrawSelect.add(tglbtnDraw);
 		
 		JToggleButton tglbtnSelect = new JToggleButton("Select");
@@ -90,16 +108,21 @@ public class FrmDrawing extends JFrame {
 		pnlWest.add(pnlModifyDelete);
 		pnlModifyDelete.setPreferredSize(new Dimension(10,10));
 		
-		JToggleButton tglbtnModify = new JToggleButton("Modify");
-		pnlModifyDelete.add(tglbtnModify);
+		JButton btnModify = new JButton("Modify");
+		pnlModifyDelete.add(btnModify);
 		
-		JToggleButton tglbtnDelete = new JToggleButton("Delete");
-		pnlModifyDelete.add(tglbtnDelete);
+		JButton btnDelete = new JButton("Delete");
+		pnlModifyDelete.add(btnDelete);
 		
 		JPanel pnlShapes = new JPanel();
 		pnlWest.add(pnlShapes);
 		
 		JToggleButton tglbtnPoint = new JToggleButton("Point");
+		tglbtnPoint.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				currentShapeMode = SHAPE_POINT;
+			}
+		});
 		
 		JToggleButton tglbtnLine = new JToggleButton("Line");
 		
@@ -108,6 +131,16 @@ public class FrmDrawing extends JFrame {
 		JToggleButton tglbtnCircle = new JToggleButton("Circle");
 		
 		JToggleButton tglbtnDonut = new JToggleButton("Donut");
+		
+		btnGroupDrawSelect.add(tglbtnDraw);
+		btnGroupDrawSelect.add(tglbtnSelect);
+		
+		btnGroupShapes.add(tglbtnPoint);
+		btnGroupShapes.add(tglbtnLine);
+		btnGroupShapes.add(tglbtnRectangle);
+		btnGroupShapes.add(tglbtnCircle);
+		btnGroupShapes.add(tglbtnDonut);
+		
 		GroupLayout gl_pnlShapes = new GroupLayout(pnlShapes);
 		gl_pnlShapes.setHorizontalGroup(
 			gl_pnlShapes.createParallelGroup(Alignment.LEADING)
@@ -139,6 +172,25 @@ public class FrmDrawing extends JFrame {
 	}
 	
 	private MouseAdapter pnlDrawClickListener() {
-		
+		return new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Point clickedPoint = new Point(e.getX(), e.getY());
+				switch(currentShapeMode) {
+				
+				case SHAPE_POINT:
+					
+						DlgPoint dlgPoint = new DlgPoint();
+						dlgPoint.setVisible(true);
+						dlgPoint.setPoint(clickedPoint);
+						if(dlgPoint.isOk()) {
+							Point point = dlgPoint.getPoint();
+							pnlDrawing.addShape(point);
+							pnlDrawing.repaint();
+						}
+					}
+				}
+			
+		};
 	}
 }

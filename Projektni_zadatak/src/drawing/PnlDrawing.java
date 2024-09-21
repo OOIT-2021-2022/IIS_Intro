@@ -18,7 +18,7 @@ public class PnlDrawing extends JPanel {
 	 * Create the panel.
 	 */
 	public PnlDrawing() {
-		setBackground(Color.BLACK);
+		
 	}
 	
 	public void addShape(Shape shape) {
@@ -27,6 +27,7 @@ public class PnlDrawing extends JPanel {
 	}
 	
 	public void paint(Graphics g) {
+		super.paint(g);
 		Iterator<Shape> it = shapes.iterator();
 		while(it.hasNext()) {
 			it.next().draw(g);
