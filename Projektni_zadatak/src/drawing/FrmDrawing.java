@@ -218,12 +218,25 @@ public class FrmDrawing extends JFrame {
 						break;
 		
 				case SHAPE_LINE:
-						if(isLineDrawing) {
+						if(!isLineDrawing) {
+						startPoint = clickedPoint;
+						isLineDrawing = true; 
+					} 	
+						else {
 							DlgLine dlgLine = new DlgLine();
-							
-					}
+							Line line = new Line(startPoint, clickedPoint);
+							dlgLine.setLine(line);
+							dlgLine.setVisible(true);
+							dlgLine.setColor(edgeColor);
+							if(dlgLine.isOk()) {
+								pnlDrawing.addShape(dlgLine.getLine());
+								pnlDrawing.repaint();
+							}
+							isLineDrawing = false;
+							startPoint = null;
+						}
 						break;
-				
+						
 				case SHAPE_RECTANGLE:
 					DlgRectangle dlgRectangle = new DlgRectangle();
 					dlgRectangle.setPoint(clickedPoint);

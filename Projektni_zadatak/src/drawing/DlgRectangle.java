@@ -31,9 +31,9 @@ public class DlgRectangle extends JDialog {
 	private JTextField txtYCoordinate;
 	private JTextField txtWidth;
 	private JTextField txtHeight;
-	private Color edgeColor;
-	private Color innerColor;
-	private Rectangle rectangle;
+	private Color edgeColor = Color.BLACK;
+	private Color innerColor = Color.WHITE;
+	private Rectangle rectangle = null;
 	private boolean isOk = false;
 
 	/**

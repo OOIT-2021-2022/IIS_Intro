@@ -32,7 +32,8 @@ public class Circle extends SurfaceShape{
 	}
 	
 	public Circle(Point center, int radius, Color color, Color innerColor) {
-		this(center, radius, color);
+		this(center, radius);
+		this.setColor(color);
 		this.setInnerColor(innerColor);
 	}
 	

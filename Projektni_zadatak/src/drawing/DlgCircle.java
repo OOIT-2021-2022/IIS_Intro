@@ -30,8 +30,8 @@ public class DlgCircle extends JDialog {
 	private JTextField txtXCoordinate;
 	private JTextField txtYCoordinate;
 	private JTextField txtRadius;
-	private Color edgeColor = null;
-	private Color innerColor = null;
+	private Color edgeColor = Color.BLACK;
+	private Color innerColor = Color.WHITE;
 	private Circle circle = null;
 	private boolean isOk = false;
 

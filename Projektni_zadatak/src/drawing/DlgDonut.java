@@ -32,8 +32,8 @@ public class DlgDonut extends JDialog {
 	private JTextField txtYCoordinate;
 	private JTextField txtDonutRadius;
 	private JTextField txtDonutInnerRadius;
-	private Color edgeColor = null;
-	private Color innerColor = null;
+	private Color edgeColor = Color.BLACK;
+	private Color innerColor = Color.WHITE;
 	private Donut donut = null;
 	private boolean isOk = false;
 
@@ -70,8 +70,10 @@ public class DlgDonut extends JDialog {
 		txtYCoordinate.setHorizontalAlignment(SwingConstants.TRAILING);
 		txtYCoordinate.setColumns(10);
 		txtDonutRadius = new JTextField();
+		txtDonutRadius.setHorizontalAlignment(SwingConstants.TRAILING);
 		txtDonutRadius.setColumns(10);
 		txtDonutInnerRadius = new JTextField();
+		txtDonutInnerRadius.setHorizontalAlignment(SwingConstants.TRAILING);
 		txtDonutInnerRadius.setColumns(10);
 		JButton btnEdgeColor = new JButton("Edge Color");
 		btnEdgeColor.addActionListener(new ActionListener() {

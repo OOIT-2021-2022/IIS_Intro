@@ -31,7 +31,7 @@ public class DlgLine extends JDialog {
 	private JTextField txtY1Coordinate;
 	private JTextField txtX2Coordinate;
 	private JTextField txtY2Coordinate;
-	private Color color;
+	private Color color = Color.BLACK;
 	private Line line;
 	private boolean isOk = false;
 
@@ -193,6 +193,20 @@ public class DlgLine extends JDialog {
 		txtY2Coordinate.setText(String.valueOf(line.getEndPoint().getY()));
 		color = line.getColor();
 	}
+	
+	public void setStartPoint(Point point) {
+		txtX1Coordinate.setText(String.valueOf(point.getX()));
+		txtY1Coordinate.setText(String.valueOf(point.getY()));
+		
+	}
+	
+	public void setEndPoint(Point point) {
+		txtX2Coordinate.setText(String.valueOf(point.getX()));
+		txtY2Coordinate.setText(String.valueOf(point.getY()));
+		
+	}
+	
+	
 
 	public JTextField getTxtX1Coordinate() {
 		return txtX1Coordinate;
