@@ -213,7 +213,6 @@ public class FrmDrawing extends JFrame {
 						if(dlgPoint.isOk()) {
 							Point point = dlgPoint.getPoint();
 							pnlDrawing.addShape(point);
-							pnlDrawing.repaint();
 						}
 						break;
 		
@@ -230,7 +229,6 @@ public class FrmDrawing extends JFrame {
 							dlgLine.setColor(edgeColor);
 							if(dlgLine.isOk()) {
 								pnlDrawing.addShape(dlgLine.getLine());
-								pnlDrawing.repaint();
 							}
 							isLineDrawing = false;
 							startPoint = null;
@@ -245,7 +243,6 @@ public class FrmDrawing extends JFrame {
 					if(dlgRectangle.isOk()) {
 						Rectangle rectangle = dlgRectangle.getRectangle();
 						pnlDrawing.addShape(rectangle);
-						pnlDrawing.repaint();
 					}
 					break;
 					
@@ -257,7 +254,6 @@ public class FrmDrawing extends JFrame {
 					if(dlgCircle.isOk()) {
 						Circle circle = dlgCircle.getCircle();
 						pnlDrawing.addShape(circle);
-						pnlDrawing.repaint();
 					}
 					break;
 				
@@ -269,7 +265,6 @@ public class FrmDrawing extends JFrame {
 					if(dlgDonut.isOk()) {
 						Donut donut = dlgDonut.getDonut();
 						pnlDrawing.addShape(donut);
-						pnlDrawing.repaint();
 						
 					}
 					break;
