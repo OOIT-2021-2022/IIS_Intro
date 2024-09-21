@@ -337,6 +337,15 @@ public class FrmDrawing extends JFrame {
 						pnlDrawing.repaint();
 					}
 			}
+				if (shape instanceof Line) {
+					DlgLine dlgLine = new DlgLine();
+					dlgLine.setLine((Line)shape);
+					dlgLine.setVisible(true);
+					if(dlgLine.isOk()) {
+						pnlDrawing.setShape(index, dlgLine.getLine());
+						pnlDrawing.repaint();
+					}
+				}
 		}
 	};
 	};
