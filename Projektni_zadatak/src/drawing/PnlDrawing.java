@@ -60,7 +60,7 @@ public class PnlDrawing extends JPanel {
 		shapes.set(index, shape);
 	}
 	
-	public void removeSelected() {
+	public void removeSelected() { //prosli commit
 	    for (int i = shapes.size() - 1; i >= 0; i--) {
 	        if (shapes.get(i).isSelected()) {
 	            shapes.remove(i);
