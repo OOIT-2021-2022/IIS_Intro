@@ -365,7 +365,6 @@ public class FrmDrawing extends JFrame {
 					dlgCircle.setVisible(true);
 					if(dlgCircle.isOk()) {
 						pnlDrawing.setShape(index, dlgCircle.getCircle());
-						repaint();
 					}
 				}
 				
@@ -375,7 +374,6 @@ public class FrmDrawing extends JFrame {
 					dlgDonut.setVisible(true);
 					if(dlgDonut.isOk()) {
 						pnlDrawing.setShape(index, dlgDonut.getDonut());
-						repaint();
 					}
 				}
 		}
@@ -385,7 +383,9 @@ public class FrmDrawing extends JFrame {
 	private ActionListener btnDeleteListener() {
 		return new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(pnlDrawing.isEmpty()) { //
+				int index = pnlDrawing.getSelected();
+				if(index == -1) { 
+					JOptionPane.showMessageDialog(null, "Please select a shape to delete.", "No Shape Selected", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				int confirmation = JOptionPane.showConfirmDialog(null, 
@@ -394,7 +394,6 @@ public class FrmDrawing extends JFrame {
 				if(confirmation == JOptionPane.YES_OPTION) {
 					pnlDrawing.removeSelected();
 				}
-			//dodata delete opcija
 			}
 		};
 	}
