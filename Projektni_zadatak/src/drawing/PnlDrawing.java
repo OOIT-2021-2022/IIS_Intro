@@ -58,6 +58,7 @@ public class PnlDrawing extends JPanel {
 	
 	public void setShape(int index, Shape shape) {
 		shapes.set(index, shape);
+		repaint();
 	}
 	
 	public void removeSelected() {

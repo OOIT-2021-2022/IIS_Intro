@@ -334,7 +334,7 @@ public class FrmDrawing extends JFrame {
 					
 					if(dlgPoint.isOk()) {
 						pnlDrawing.setShape(index, dlgPoint.getPoint());
-						pnlDrawing.repaint();
+						
 					}
 			}
 				if (shape instanceof Line) {
@@ -343,7 +343,7 @@ public class FrmDrawing extends JFrame {
 					dlgLine.setVisible(true);
 					if(dlgLine.isOk()) {
 						pnlDrawing.setShape(index, dlgLine.getLine());
-						pnlDrawing.repaint();
+						
 					}
 				}
 				
@@ -353,7 +353,17 @@ public class FrmDrawing extends JFrame {
 					dlgRectangle.setVisible(true);
 					if(dlgRectangle.isOk()) {
 						pnlDrawing.setShape(index, dlgRectangle.getRectangle());
-						pnlDrawing.repaint();
+						
+					}
+				}
+				
+				if (shape instanceof Circle) {
+					DlgCircle dlgCircle = new DlgCircle();
+					dlgCircle.setCircle((Circle)shape);
+					dlgCircle.setVisible(true);
+					if(dlgCircle.isOk()) {
+						pnlDrawing.setShape(index, dlgCircle.getCircle());
+						
 					}
 				}
 		}
