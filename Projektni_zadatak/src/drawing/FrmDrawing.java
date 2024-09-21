@@ -135,6 +135,7 @@ public class FrmDrawing extends JFrame {
 					btnDelete.setEnabled(true);
 					disableDrawButtons();
 					currentMode = MODE_SELECT;
+					resetDrawingState();
 				}
 				else{
 					enableDrawButtons();
@@ -258,25 +259,25 @@ public class FrmDrawing extends JFrame {
 						break;
 		
 				case SHAPE_LINE:
-						if(!isLineDrawing) {
-						startPoint = clickedPoint;
-						isLineDrawing = true; 
-					} 	
-						else {
-							DlgLine dlgLine = new DlgLine();
-							dlgLine.setStartPoint(startPoint);
-							dlgLine.setEndPoint(clickedPoint);
-							dlgLine.setVisible(true);
-							dlgLine.setColor(edgeColor);
-							if(dlgLine.isOk()) {
-								Line line = dlgLine.getLine();
-								pnlDrawing.addShape(line);
-							} 
-							isLineDrawing = false;
-							startPoint = null;
-						}
-						break;
+				    if (!isLineDrawing) {
+				        startPoint = clickedPoint;
+				        isLineDrawing = true; 
+				    } else {
+				            DlgLine dlgLine = new DlgLine();
+				            dlgLine.setStartPoint(startPoint);
+				            dlgLine.setEndPoint(clickedPoint);
+				            dlgLine.setVisible(true);
+				            dlgLine.setColor(edgeColor);
+				            if (dlgLine.isOk()) {
+				                Line line = dlgLine.getLine();
+				                pnlDrawing.addShape(line);
+				            }
+				            startPoint = null;
+				            isLineDrawing = false;
+				    	} 
+				    break;
 						
+				    
 				case SHAPE_RECTANGLE:
 					DlgRectangle dlgRectangle = new DlgRectangle();
 					dlgRectangle.setPoint(clickedPoint);
@@ -325,7 +326,7 @@ public class FrmDrawing extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int index = pnlDrawing.getSelected();
 				if (index == -1) {
-					JOptionPane.showMessageDialog(null, "Please select a shape to modify.", "No Shape Detected", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Please select a shape to modify.", "No Shape Detected", JOptionPane.WARNING_MESSAGE);
 					return;
 				}
 				Shape shape = pnlDrawing.getShape(index);		
@@ -403,8 +404,16 @@ public class FrmDrawing extends JFrame {
 				if(confirmation == JOptionPane.YES_OPTION) {
 					pnlDrawing.removeSelected();
 				}
+				if(confirmation == JOptionPane.NO_OPTION) {
+					pnlDrawing.deselect();
+				}
 			}
 		};
+	}
+	
+	private void resetDrawingState() {
+		isLineDrawing = false;
+		startPoint = null;
 	}
 	
 	private void disableDrawButtons() {

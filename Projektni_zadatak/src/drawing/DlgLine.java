@@ -201,6 +201,10 @@ public class DlgLine extends JDialog {
 		
 	}
 	
+	public Point getEndPoint() {
+		return new Point(Integer.parseInt(txtX2Coordinate.getText()), Integer.parseInt(txtX2Coordinate.getText()));
+	}
+	
 	public void setEndPoint(Point point) {
 		txtX2Coordinate.setText(String.valueOf(point.getX()));
 		txtY2Coordinate.setText(String.valueOf(point.getY()));
