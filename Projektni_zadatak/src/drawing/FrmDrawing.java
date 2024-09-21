@@ -53,8 +53,10 @@ public class FrmDrawing extends JFrame {
 	private static final int SHAPE_RECTANGLE = 3;
 	private static final int SHAPE_CIRCLE = 4;
 	private static final int SHAPE_DONUT = 5;
-	private boolean isSelectedMode = false;
 	private Shape selectedShape = null;
+	private static final int MODE_DRAW = 1;
+	private static final int MODE_SELECT = 2;
+	
 	
 	JToggleButton tglbtnDraw = new JToggleButton("Draw");
 	JToggleButton tglbtnSelect = new JToggleButton("Select");
@@ -66,7 +68,7 @@ public class FrmDrawing extends JFrame {
 	JToggleButton tglbtnCircle = new JToggleButton("Circle");
 	JToggleButton tglbtnDonut = new JToggleButton("Donut");
 	
-	
+	private int currentMode = MODE_DRAW;
 	private int currentShapeMode = SHAPE_NONE;
 	/**
 	 * Launch the application.
@@ -115,17 +117,30 @@ public class FrmDrawing extends JFrame {
 		tglbtnDraw.setSelected(true);
 		tglbtnDraw.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				if(tglbtnDraw.isSelected()) {
+					currentMode = MODE_DRAW;
+					setDefaultDrawMode();
+				}
+				else {
+					currentMode = MODE_SELECT;
+				}
 			}
 		});
 		pnlDrawSelect.add(tglbtnDraw);
 		
 		tglbtnSelect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				isSelectedMode = true;
-				btnModify.setEnabled(true);
-				btnDelete.setEnabled(true);
-				disableDrawButtons();
+				if(tglbtnSelect.isSelected()) {
+					btnModify.setEnabled(true);
+					btnDelete.setEnabled(true);
+					disableDrawButtons();
+					currentMode = MODE_SELECT;
+				}
+				else{
+					enableDrawButtons();
+					btnModify.setEnabled(false);
+					btnDelete.setEnabled(false);
+				}
 			}
 		});
 		pnlDrawSelect.add(tglbtnSelect);
@@ -216,6 +231,10 @@ public class FrmDrawing extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Point clickedPoint = new Point(e.getX(), e.getY());
+				pnlDrawing.deselect();
+				
+				if (currentMode == MODE_DRAW) {
+		
 				switch(currentShapeMode) {
 				
 				case SHAPE_POINT:
@@ -282,9 +301,14 @@ public class FrmDrawing extends JFrame {
 						
 					}
 					break;
-				}	
-		}};
-		
+				}
+		}else if(currentMode == MODE_SELECT) {
+			pnlDrawing.select(clickedPoint);
+			return;
+		}
+				
+		};
+		};
 	}
 	
 	private void disableDrawButtons() {
@@ -304,7 +328,6 @@ public class FrmDrawing extends JFrame {
 	}
 	
 	private void setDefaultDrawMode() {
-		isSelectedMode = false;
 		enableDrawButtons();
 		btnModify.setEnabled(false);
 		btnDelete.setEnabled(false);

@@ -7,12 +7,14 @@ import java.util.Iterator;
 
 import javax.swing.JPanel;
 
+import geometry.Point;
 import geometry.Shape;
 
 public class PnlDrawing extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Shape> shapes = new ArrayList<Shape>();
+	private int i;
 
 	/**
 	 * Create the panel.
@@ -25,6 +27,22 @@ public class PnlDrawing extends JPanel {
 		shapes.add(shape);
 		repaint();
 	}
+	
+	public void deselect() {
+		shapes.forEach(shape -> shape.setSelected(false));
+		repaint();
+	}
+	
+	public void select(Point point) {
+		for (i = shapes.size()-1; i >= 0; i--) {
+			if (shapes.get(i).contains(point.getX(), point.getY())) {
+				shapes.get(i).setSelected(true);
+				repaint();
+				return;
+			}
+		}
+	}
+	
 	
 	public void paint(Graphics g) {
 		super.paint(g);
