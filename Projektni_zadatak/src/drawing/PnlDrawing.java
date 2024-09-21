@@ -81,7 +81,7 @@ public class PnlDrawing extends JPanel {
 	}
 	
 	public boolean isEmpty() {
-		return shapes.isEmpty();
+		return shapes.isEmpty(); //
 	}
 
 	public ArrayList<Shape> getShapes() {

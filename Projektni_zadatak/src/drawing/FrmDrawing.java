@@ -385,7 +385,7 @@ public class FrmDrawing extends JFrame {
 	private ActionListener btnDeleteListener() {
 		return new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(pnlDrawing.isEmpty()) {
+				if(pnlDrawing.isEmpty()) { //
 					return;
 				}
 				int confirmation = JOptionPane.showConfirmDialog(null, 
@@ -394,7 +394,7 @@ public class FrmDrawing extends JFrame {
 				if(confirmation == JOptionPane.YES_OPTION) {
 					pnlDrawing.removeSelected();
 				}
-			
+			//dodata delete opcija
 			}
 		};
 	}
