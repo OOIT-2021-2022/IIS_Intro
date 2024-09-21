@@ -346,6 +346,16 @@ public class FrmDrawing extends JFrame {
 						pnlDrawing.repaint();
 					}
 				}
+				
+				if (shape instanceof Rectangle) {
+					DlgRectangle dlgRectangle = new DlgRectangle();
+					dlgRectangle.setRectangle((Rectangle)shape);
+					dlgRectangle.setVisible(true);
+					if(dlgRectangle.isOk()) {
+						pnlDrawing.setShape(index, dlgRectangle.getRectangle());
+						pnlDrawing.repaint();
+					}
+				}
 		}
 	};
 	};
