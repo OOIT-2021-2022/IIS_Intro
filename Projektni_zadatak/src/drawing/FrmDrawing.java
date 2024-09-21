@@ -11,6 +11,7 @@ import geometry.Donut;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
+import geometry.Shape;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -43,7 +44,6 @@ public class FrmDrawing extends JFrame {
 	private Color innerColor = Color.WHITE;
 	private PnlDrawing pnlDrawing;
 	private Point startPoint = null;
-	private Point endPoint = null; //for line
 	private boolean isLineDrawing = false;
 	private final ButtonGroup btnGroupDrawSelect = new ButtonGroup();
 	private final ButtonGroup btnGroupShapes = new ButtonGroup();
@@ -53,6 +53,19 @@ public class FrmDrawing extends JFrame {
 	private static final int SHAPE_RECTANGLE = 3;
 	private static final int SHAPE_CIRCLE = 4;
 	private static final int SHAPE_DONUT = 5;
+	private boolean isSelectedMode = false;
+	private Shape selectedShape = null;
+	
+	JToggleButton tglbtnDraw = new JToggleButton("Draw");
+	JToggleButton tglbtnSelect = new JToggleButton("Select");
+	JButton btnModify = new JButton("Modify");
+	JButton btnDelete = new JButton("Delete");
+	JToggleButton tglbtnPoint = new JToggleButton("Point");
+	JToggleButton tglbtnLine = new JToggleButton("Line");
+	JToggleButton tglbtnRectangle = new JToggleButton("Rectangle");
+	JToggleButton tglbtnCircle = new JToggleButton("Circle");
+	JToggleButton tglbtnDonut = new JToggleButton("Donut");
+	
 	
 	private int currentShapeMode = SHAPE_NONE;
 	/**
@@ -81,6 +94,7 @@ public class FrmDrawing extends JFrame {
 		setBounds(100, 100, 1000, 650);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setDefaultDrawMode();
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -98,15 +112,22 @@ public class FrmDrawing extends JFrame {
 		JPanel pnlDrawSelect = new JPanel();
 		pnlWest.add(pnlDrawSelect);
 		
-		JToggleButton tglbtnDraw = new JToggleButton("Draw");
+		tglbtnDraw.setSelected(true);
 		tglbtnDraw.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+			
 			}
 		});
 		pnlDrawSelect.add(tglbtnDraw);
 		
-		JToggleButton tglbtnSelect = new JToggleButton("Select");
+		tglbtnSelect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				isSelectedMode = true;
+				btnModify.setEnabled(true);
+				btnDelete.setEnabled(true);
+				disableDrawButtons();
+			}
+		});
 		pnlDrawSelect.add(tglbtnSelect);
 		
 		JPanel pnlModifyDelete = new JPanel();
@@ -114,44 +135,37 @@ public class FrmDrawing extends JFrame {
 		pnlWest.add(pnlModifyDelete);
 		pnlModifyDelete.setPreferredSize(new Dimension(10,10));
 		
-		JButton btnModify = new JButton("Modify");
 		pnlModifyDelete.add(btnModify);
 		
-		JButton btnDelete = new JButton("Delete");
 		pnlModifyDelete.add(btnDelete);
 		
 		JPanel pnlShapes = new JPanel();
 		pnlWest.add(pnlShapes);
 		
-		JToggleButton tglbtnPoint = new JToggleButton("Point");
 		tglbtnPoint.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentShapeMode = SHAPE_POINT;
 			}
 		});
 		
-		JToggleButton tglbtnLine = new JToggleButton("Line");
 		tglbtnLine.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentShapeMode = SHAPE_LINE;
 			}
 		});
 		
-		JToggleButton tglbtnRectangle = new JToggleButton("Rectangle");
 		tglbtnRectangle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentShapeMode = SHAPE_RECTANGLE;
 			}
 		});
 		
-		JToggleButton tglbtnCircle = new JToggleButton("Circle");
 		tglbtnCircle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentShapeMode = SHAPE_CIRCLE;
 			}
 		});
 		
-		JToggleButton tglbtnDonut = new JToggleButton("Donut");
 		tglbtnDonut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				currentShapeMode = SHAPE_DONUT;
@@ -273,10 +287,28 @@ public class FrmDrawing extends JFrame {
 		
 	}
 	
-	public void resetDrawingState() {
-		currentShapeMode = SHAPE_NONE;
-		startPoint = null;
-		endPoint = null;
-		isLineDrawing = false;
+	private void disableDrawButtons() {
+		tglbtnPoint.setEnabled(false);
+		tglbtnLine.setEnabled(false);
+		tglbtnCircle.setEnabled(false);
+		tglbtnDonut.setEnabled(false);
+		tglbtnRectangle.setEnabled(false);
 	}
+	
+	private void enableDrawButtons() {
+		tglbtnPoint.setEnabled(true);
+		tglbtnLine.setEnabled(true);
+		tglbtnCircle.setEnabled(true);
+		tglbtnDonut.setEnabled(true);
+		tglbtnRectangle.setEnabled(true);
+	}
+	
+	private void setDefaultDrawMode() {
+		isSelectedMode = false;
+		enableDrawButtons();
+		btnModify.setEnabled(false);
+		btnDelete.setEnabled(false);
+	}
+	
+	
 }
