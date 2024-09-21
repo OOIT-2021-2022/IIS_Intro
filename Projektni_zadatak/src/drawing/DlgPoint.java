@@ -155,7 +155,9 @@ public class DlgPoint extends JDialog {
 	}
 
 	public void setPoint(Point point) {
-		this.point = point;
+		txtXCoordinate.setText(String.valueOf(point.getX()));
+		txtYCoordinate.setText(String.valueOf(point.getY()));
+		color = point.getColor();
 	}
 
 	public JTextField getTxtXCoordinate() {

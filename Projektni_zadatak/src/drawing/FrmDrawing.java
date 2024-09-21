@@ -181,8 +181,8 @@ public class FrmDrawing extends JFrame {
 				case SHAPE_POINT:
 					
 						DlgPoint dlgPoint = new DlgPoint();
-						dlgPoint.setVisible(true);
 						dlgPoint.setPoint(clickedPoint);
+						dlgPoint.setVisible(true);
 						if(dlgPoint.isOk()) {
 							Point point = dlgPoint.getPoint();
 							pnlDrawing.addShape(point);
