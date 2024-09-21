@@ -324,9 +324,10 @@ public class FrmDrawing extends JFrame {
 		return new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int index = pnlDrawing.getSelected();
-				if (index == -1) 
+				if (index == -1) {
+					JOptionPane.showMessageDialog(null, "Please select a shape to modify.", "No Shape Detected", JOptionPane.ERROR_MESSAGE);
 					return;
-				
+				}
 				Shape shape = pnlDrawing.getShape(index);
 				System.out.println("Modifying shape: " + shape.getClass().getSimpleName());
 				
