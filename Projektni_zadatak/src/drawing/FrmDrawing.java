@@ -256,6 +256,7 @@ public class FrmDrawing extends JFrame {
 							Point point = dlgPoint.getPoint();
 							pnlDrawing.addShape(point);
 						}
+						resetDrawingState();
 						break;
 		
 				case SHAPE_LINE:
@@ -287,6 +288,7 @@ public class FrmDrawing extends JFrame {
 						Rectangle rectangle = dlgRectangle.getRectangle();
 						pnlDrawing.addShape(rectangle);
 					}
+					resetDrawingState();
 					break;
 					
 				case SHAPE_CIRCLE:
@@ -298,6 +300,7 @@ public class FrmDrawing extends JFrame {
 						Circle circle = dlgCircle.getCircle();
 						pnlDrawing.addShape(circle);
 					}
+					resetDrawingState();
 					break;
 				
 				case SHAPE_DONUT:
@@ -310,6 +313,7 @@ public class FrmDrawing extends JFrame {
 						pnlDrawing.addShape(donut);
 						
 					}
+					resetDrawingState();
 					break;
 				}
 		}else if(currentMode == MODE_SELECT) {
@@ -414,6 +418,8 @@ public class FrmDrawing extends JFrame {
 	private void resetDrawingState() {
 		isLineDrawing = false;
 		startPoint = null;
+		edgeColor = Color.BLACK;
+		innerColor = Color.WHITE;
 	}
 	
 	private void disableDrawButtons() {
@@ -437,6 +443,5 @@ public class FrmDrawing extends JFrame {
 		btnModify.setEnabled(false);
 		btnDelete.setEnabled(false);
 	}
-	
 	
 }

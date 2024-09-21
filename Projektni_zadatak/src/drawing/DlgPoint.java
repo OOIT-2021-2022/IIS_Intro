@@ -28,7 +28,7 @@ public class DlgPoint extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtXCoordinate;
 	private JTextField txtYCoordinate;
-	private Color color = Color.BLACK;
+	private Color edgeColor = Color.BLACK;
 	private Point point = null;
 	private boolean isOk = false;
 
@@ -66,9 +66,9 @@ public class DlgPoint extends JDialog {
 		JButton btnColor = new JButton("Color");
 		btnColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Color selectedColor = JColorChooser.showDialog(null, "Choose a color for your Point", color);
+				Color selectedColor = JColorChooser.showDialog(null, "Choose a color for your Point", edgeColor);
 				if(selectedColor != null){
-					color = selectedColor;
+					edgeColor = selectedColor;
 				}
 			}
 		});
@@ -122,13 +122,13 @@ public class DlgPoint extends JDialog {
 						else {
 							int x = Integer.parseInt(txtXCoordinate.getText());
 							int y = Integer.parseInt(txtYCoordinate.getText());
-							if(x < 0 || y < 0) {
+							if(x <= 0 || y <= 0) {
 								JOptionPane.showMessageDialog(null, "Coordinates have to be greater than zero!", "Warning", JOptionPane.ERROR_MESSAGE);
 								
 							}
 							else {
 								isOk = true;
-								point = new Point(x, y, false, color);
+								point = new Point(x, y, false, edgeColor);
 								setVisible(false);
 							}
 						}
@@ -161,7 +161,7 @@ public class DlgPoint extends JDialog {
 	public void setPoint(Point point) {
 		txtXCoordinate.setText(String.valueOf(point.getX()));
 		txtYCoordinate.setText(String.valueOf(point.getY()));
-		color = point.getColor();
+		edgeColor = point.getColor();
 	}
 
 	public JTextField getTxtXCoordinate() {
@@ -189,11 +189,11 @@ public class DlgPoint extends JDialog {
 	}
 
 	public Color getColor() {
-		return color;
+		return edgeColor;
 	}
 
 	public void setColor(Color color) {
-		this.color = color;
+		this.edgeColor = color;
 	}
 
 }
